@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import Patient from "../models/Patient.js";
 import Doctor from "../models/Doctor.js";
+import jwt from "jsonwebtoken";
 import { z } from "zod";
 
 //registration

@@ -5,6 +5,7 @@ import { registerDoctor, registerPatient } from "./controllers/auth.js";
 import multer from "multer";
 import mongoose from "mongoose";
 import { fileURLToPath } from "url";
+import authRoutes from "./routes/auth.js";
 
 //configuration
 
@@ -17,6 +18,7 @@ dotenv.config();
 //middleware
 app.use(express.json());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+app.use("/auth", authRoutes);
 
 // File Storage
 
