@@ -23,7 +23,7 @@ export const registerPatient = async (req, res) => {
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
-    emailSchema.parse(email);
+
     // const locationObj = await axios.get(
     //   "https://geocode.maps.co/search?q=" +
     //     location +
@@ -42,13 +42,12 @@ export const registerPatient = async (req, res) => {
       language,
     });
 
+    emailSchema.parse(newPatient);
     await newPatient.save();
 
-    const patient = await Patient.find();
-
-    res.status(201).post(patient);
+    res.status(201).json(newPatient);
   } catch (error) {
-    res.status(409).json({
+    res.status(400).json({
       message: error.message,
     });
   }
