@@ -22,21 +22,26 @@ const DoctorSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    cityName: {
-        type: String,
-        required: true
+    location: {
+      type: String,
+      required: true,
     },
-    
-    
+    patientList: {
+      type: Array,
+    },
     language: {
       type: Array,
       required: true,
+    },
+    files: {
+      type: Map,
+      of: String,
     },
     specialist: {
       type: String,
       required: true,
       max: 50,
-    }
+    },
   },
   { timestamps: true }
 );

@@ -42,6 +42,13 @@ const PatientSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    doctorList: {
+      type: Array,
+    },
+    files: {
+      type: Map,
+      of: String,
+    },
   },
   { timestamps: true }
 );

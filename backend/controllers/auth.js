@@ -24,8 +24,6 @@ export const registerPatient = async (req, res) => {
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
-    emailSchema.parse(email);
-
 
     // const locationObj = await axios.get(
     //   "https://geocode.maps.co/search?q=" +
@@ -43,8 +41,56 @@ export const registerPatient = async (req, res) => {
       age,
       sex,
       language,
+      files: [],
+      doctorList: [],
     });
+
+    emailSchema.parse(newPatient);
     const xyz = await newPatient.save();
+
+    res.status(201).json(xyz);
+  } catch (error) {
+    res.status(400).json({
+      error: error.message,
+    });
+  }
+};
+
+export const registerDoctor = async (req, res) => {
+  try {
+    const {
+      fullName,
+      email,
+      password,
+      picturePath,
+      location,
+      specialist,
+      language,
+    } = req.body;
+
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(password, salt);
+
+    // const locationObj = await axios.get(
+    //   "https://geocode.maps.co/search?q=" +
+    //     location +
+    //     "&api_key=65eee4b0c9e2b147377658rsp5199d9"
+    // );
+
+    const newDoctor = new Doctor({
+      fullName,
+      email,
+      password: passwordHash,
+      picturePath,
+      location,
+      specialist,
+      language,
+      files: [],
+      patientList: [],
+    });
+
+    emailSchema.parse(newDoctor);
+    const xyz = await newDoctor.save();
 
     res.status(201).json(xyz);
   } catch (error) {

@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import dotenv from "dotenv";
-import { registerPatient } from "./controllers/auth.js";
+import { registerDoctor, registerPatient } from "./controllers/auth.js";
 import multer from "multer";
 import mongoose from "mongoose";
 import { fileURLToPath } from "url";
@@ -33,6 +33,7 @@ const upload = multer({ storage });
 
 //requests with data
 app.post("/auth/patient/register", upload.single("picture"), registerPatient);
+app.post("/auth/doctor/register", upload.single("picture"), registerDoctor);
 
 //mongoose setup
 mongoose
