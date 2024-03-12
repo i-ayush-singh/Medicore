@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import Patient from "../models/Patient.js";
+import Doctor from "../models/Doctor.js";
 import { z } from "zod";
 
 //registration
@@ -23,6 +24,8 @@ export const registerPatient = async (req, res) => {
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
+    emailSchema.parse(email);
+
 
     // const locationObj = await axios.get(
     //   "https://geocode.maps.co/search?q=" +
@@ -41,14 +44,12 @@ export const registerPatient = async (req, res) => {
       sex,
       language,
     });
+    const xyz = await newPatient.save();
 
-    emailSchema.parse(newPatient);
-    await newPatient.save();
-
-    res.status(201).json(newPatient);
+    res.status(201).json(xyz);
   } catch (error) {
     res.status(400).json({
-      message: error.message,
+      error: error.message,
     });
   }
 };
