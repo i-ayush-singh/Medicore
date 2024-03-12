@@ -22,11 +22,7 @@ const PatientSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    latitude: {
-      type: String,
-      required: true,
-    },
-    longitude: {
+    location: {
       type: String,
       required: true,
     },
