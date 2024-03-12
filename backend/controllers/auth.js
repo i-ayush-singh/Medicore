@@ -130,7 +130,6 @@ export const registerDoctor = async (req, res) => {
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
-    emailSchema.parse(email);
 
     // const locationObj = await axios.get(
     //   "https://geocode.maps.co/search?q=" +
@@ -147,6 +146,8 @@ export const registerDoctor = async (req, res) => {
       specialist,
       language,
     });
+
+    emailSchema.parse(newDoctor);
     const xyz = await newDoctor.save();
 
     res.status(201).json(xyz);
