@@ -22,7 +22,7 @@ const DoctorSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    cityName: {
+    location: {
         type: String,
         required: true
     },
