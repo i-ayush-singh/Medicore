@@ -44,8 +44,6 @@ export const registerPatient = async (req, res) => {
       files: [],
       doctorList: [],
     });
-
-    emailSchema.parse(newPatient);
     const xyz = await newPatient.save();
 
     res.status(201).json(xyz);
@@ -55,7 +53,68 @@ export const registerPatient = async (req, res) => {
     });
   }
 };
+export const loginPatient = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
+    const requiredUser = await Patient.findOne({ email: email });
+
+    if (!requiredUser) {
+      return res.status(400).json({ msg: "Requested user does not exist" });
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      requiredUser.password
+    );
+
+    if (!isPasswordValid) {
+      return res.status(400).json({ msg: "Wrong password for requested user" });
+    }
+
+    const sessionToken = jwt.sign(
+      { id: requiredUser._id },
+      process.env.JWT_SECRET
+    );
+
+    delete requiredUser.password;
+
+    res.status(200).send({ sessionToken, requiredUser });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+export const loginDoctor = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const requiredUser = await Doctor.findOne({ email: email });
+
+    if (!requiredUser) {
+      return res.status(400).json({ msg: "Requested user does not exist" });
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      requiredUser.password
+    );
+
+    if (!isPasswordValid) {
+      return res.status(400).json({ msg: "Wrong password for requested user" });
+    }
+
+    const sessionToken = jwt.sign(
+      { id: requiredUser._id },
+      process.env.JWT_SECRET
+    );
+
+    delete requiredUser.password;
+
+    res.status(200).send({ sessionToken, requiredUser });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
 export const registerDoctor = async (req, res) => {
   try {
     const {
@@ -70,6 +129,7 @@ export const registerDoctor = async (req, res) => {
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
+    emailSchema.parse(email);
 
     // const locationObj = await axios.get(
     //   "https://geocode.maps.co/search?q=" +
@@ -85,11 +145,7 @@ export const registerDoctor = async (req, res) => {
       location,
       specialist,
       language,
-      files: [],
-      patientList: [],
     });
-
-    emailSchema.parse(newDoctor);
     const xyz = await newDoctor.save();
 
     res.status(201).json(xyz);
