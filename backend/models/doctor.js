@@ -42,6 +42,10 @@ const DoctorSchema = new mongoose.Schema(
       required: true,
       max: 50,
     },
+    requests: {
+      type: Array,
+      default: [],
+    },
   },
   { timestamps: true }
 );

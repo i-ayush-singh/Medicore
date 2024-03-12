@@ -6,6 +6,7 @@ import multer from "multer";
 import mongoose from "mongoose";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
+import doctorRoutes from "./routes/doctor.js";
 
 //configuration
 
@@ -19,6 +20,7 @@ dotenv.config();
 app.use(express.json());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use("/auth", authRoutes);
+app.use("/doctor", doctorRoutes);
 
 // File Storage
 
