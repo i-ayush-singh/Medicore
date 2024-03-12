@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import Patient from "../models/Patient.js";
+import Doctor from "../models/Doctor.js";
 import { z } from "zod";
 
 //registration
@@ -24,11 +25,6 @@ export const registerPatient = async (req, res) => {
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
     emailSchema.parse(email);
-    // const locationObj = await axios.get(
-    //   "https://geocode.maps.co/search?q=" +
-    //     location +
-    //     "&api_key=65eee4b0c9e2b147377658rsp5199d9"
-    // );
 
     const newPatient = new Patient({
       fullName,
@@ -42,14 +38,109 @@ export const registerPatient = async (req, res) => {
       language,
     });
 
-    await newPatient.save();
+    const xyz = await newPatient.save();
 
-    const patient = await Patient.find();
+    res.status(201).json(xyz);
+  } catch (error) {
+    res.status(400).json({
+      error: error.message,
+    });
+  }
+};
+export const loginPatient = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-    res.status(201).post(patient);
+    const requiredUser = await Patient.findOne({ email: email });
+
+    if (!requiredUser) {
+      return res.status(400).json({ msg: "Requested user does not exist" });
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      requiredUser.password
+    );
+
+    if (!isPasswordValid) {
+      return res.status(400).json({ msg: "Wrong password for requested user" });
+    }
+
+    const sessionToken = jwt.sign(
+      { id: requiredUser._id },
+      process.env.JWT_SECRET
+    );
+
+    delete requiredUser.password;
+
+    res.status(200).send({ sessionToken, requiredUser });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+export const registerDoctor = async (req, res) => {
+  try {
+    const {
+      fullName,
+      email,
+      password,
+      picturePath,
+      location,
+      specialist,
+      language,
+    } = req.body;
+
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(password, salt);
+    emailSchema.parse(email);
+
+    const newDoctor = new Doctor({
+      fullName,
+      email,
+      password: passwordHash,
+      picturePath,
+      location,
+      specialist,
+      language,
+    });
+
+    const xyz = await newDoctor.save();
+
+    res.status(201).json(xyz);
   } catch (error) {
     res.status(409).json({
-      message: error.message,
+      error: error.message,
     });
+  }
+};
+export const loginDoctor = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const requiredUser = await Doctor.findOne({ email: email });
+
+    if (!requiredUser) {
+      return res.status(400).json({ msg: "Requested user does not exist" });
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      requiredUser.password
+    );
+
+    if (!isPasswordValid) {
+      return res.status(400).json({ msg: "Wrong password for requested user" });
+    }
+
+    const sessionToken = jwt.sign(
+      { id: requiredUser._id },
+      process.env.JWT_SECRET
+    );
+
+    delete requiredUser.password;
+
+    res.status(200).send({ sessionToken, requiredUser });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
   }
 };
