@@ -53,6 +53,8 @@ export const registerPatient = async (req, res) => {
     });
   }
 };
+<<<<<<< HEAD
+=======
 export const loginPatient = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -156,3 +158,4 @@ export const registerDoctor= async (req, res) => {
     });
   }
 };
+>>>>>>> 0ca36df1442ae0007454f7a0f7b11970bde1a310
