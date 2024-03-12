@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import axios from "axios";
-import Patient from "../models/Patient";
+import Patient from "../models/Patient.js";
 import { z } from "zod";
 
 //registration
