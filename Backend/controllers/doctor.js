@@ -114,4 +114,24 @@ export const createReport = async (req, res) => {
   }
 };
 
-export const handleBooking = async (req, res) => {};
+export const handleBooking = async (req, res) => {
+  try {
+    const { request, result, doctorId } = req.body;
+
+    const doctor = await Doctor.findById(doctorId);
+
+    const index = doctor.appointmentRequests.indexOf(request);
+
+    doctor.appointmentRequests.splice(index, 1);
+
+    if (result === "true") {
+      doctor.appointments.push(request);
+    }
+
+    await doctor.save();
+
+    res.status(200).json(doctor);
+  } catch (error) {
+    res.status(407).json({ error: error.message });
+  }
+};

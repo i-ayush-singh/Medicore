@@ -25,6 +25,14 @@ export const bookAppointment = async (req, res) => {
 
     const doctor = await Doctor.findById(doctorId);
     const patient = await Patient.findById(patientId);
+
+    if (doctor.patientList.indexOf(patientId) == -1) {
+      return res
+        .status(407)
+        .json({
+          error: "It seems you've not been assigned to this doctor yet",
+        });
+    }
     const { timings } = doctor;
 
     const patientTime = parseInt(time);
