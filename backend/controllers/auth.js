@@ -44,7 +44,7 @@ export const registerPatient = async (req, res) => {
       language,
       files: [],
       doctorList: [],
-      requests: [],
+      notifications: [],
     });
     const xyz = await newPatient.save();
 
@@ -128,6 +128,8 @@ export const registerDoctor = async (req, res) => {
       location,
       specialist,
       language,
+      fee,
+      timings,
     } = req.body;
 
     const salt = await bcrypt.genSalt();
@@ -147,6 +149,10 @@ export const registerDoctor = async (req, res) => {
       location,
       specialist,
       language,
+      fee,
+      timings,
+      files: [],
+      requests: [],
     });
 
     emailSchema.parse(newDoctor);

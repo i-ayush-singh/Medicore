@@ -37,6 +37,14 @@ const DoctorSchema = new mongoose.Schema(
       type: Map,
       of: String,
     },
+    fee: {
+      type: String,
+      required: true,
+    },
+    timings: {
+      type: Array,
+      required: true,
+    },
     specialist: {
       type: String,
       required: true,

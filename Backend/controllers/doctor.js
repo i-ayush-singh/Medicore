@@ -98,7 +98,7 @@ export const createReport = async (req, res) => {
 
     const doctor = await Doctor.findById(doctorId);
 
-    const report = await Report.findById(doctor.files[patientId]);
+    const report = await Report.findById(doctor.files.get(patientId));
 
     report.medicine = medicine;
     report.dosage = dosage;
