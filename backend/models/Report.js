@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 const ReportSchema = new mongoose.Schema(
   {
+    basicInformation: {
+      type: Array,
+      required: true,
+    },
     patientId: {
       type: String,
       required: true,

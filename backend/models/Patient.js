@@ -45,6 +45,9 @@ const PatientSchema = new mongoose.Schema(
     doctorList: {
       type: Array,
     },
+    notifications: {
+      type: Array,
+    },
     files: {
       type: Map,
       of: String,
