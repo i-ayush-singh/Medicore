@@ -38,15 +38,13 @@ const PatientSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    language: {
-      type: Array,
-      required: true,
-    },
     doctorList: {
       type: Array,
+      default: [],
     },
     notifications: {
       type: Array,
+      default: [],
     },
     files: {
       type: Map,

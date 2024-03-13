@@ -20,7 +20,6 @@ export const registerPatient = async (req, res) => {
       blood,
       age,
       sex,
-      language,
     } = req.body;
 
     const salt = await bcrypt.genSalt();
@@ -41,7 +40,6 @@ export const registerPatient = async (req, res) => {
       blood,
       age,
       sex,
-      language,
       files: [],
       doctorList: [],
       notifications: [],
@@ -127,7 +125,6 @@ export const registerDoctor = async (req, res) => {
       picturePath,
       location,
       specialist,
-      language,
       fee,
       timings,
     } = req.body;
@@ -153,6 +150,8 @@ export const registerDoctor = async (req, res) => {
       timings,
       files: [],
       requests: [],
+      appointmentRequests: [],
+      appointments: [],
     });
 
     emailSchema.parse(newDoctor);

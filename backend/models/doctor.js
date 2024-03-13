@@ -29,9 +29,13 @@ const DoctorSchema = new mongoose.Schema(
     patientList: {
       type: Array,
     },
-    language: {
+    appointmentRequests: {
       type: Array,
-      required: true,
+      default: [],
+    },
+    appointments: {
+      type: Array,
+      default: [],
     },
     files: {
       type: Map,

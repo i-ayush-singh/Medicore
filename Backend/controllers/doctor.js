@@ -113,3 +113,5 @@ export const createReport = async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 };
+
+export const handleBooking = async (req, res) => {};
