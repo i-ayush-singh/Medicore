@@ -50,6 +50,10 @@ const PatientSchema = new mongoose.Schema(
       type: Map,
       of: String,
     },
+    appointments: {
+      type: Array,
+      default: [],
+    },
   },
   { timestamps: true }
 );

@@ -27,11 +27,9 @@ export const bookAppointment = async (req, res) => {
     const patient = await Patient.findById(patientId);
 
     if (doctor.patientList.indexOf(patientId) == -1) {
-      return res
-        .status(407)
-        .json({
-          error: "It seems you've not been assigned to this doctor yet",
-        });
+      return res.status(407).json({
+        error: "It seems you've not been assigned to this doctor yet",
+      });
     }
     const { timings } = doctor;
 
@@ -63,6 +61,24 @@ export const bookAppointment = async (req, res) => {
 
     res.status(200).json(doctor);
   } catch (error) {
-    res.status(407).json({ message: error.message });
+    res.status(409).json({ message: error.message });
+  }
+};
+
+export const handleNotifications = async (req, res) => {
+  try {
+    const { message, patientId } = req.body;
+
+    const patient = await Patient.findById(patientId);
+
+    const index = patient.notifications.indexOf(message);
+
+    notifications.splice(index, 1);
+
+    await patient.save();
+
+    res.status(200).json(patient);
+  } catch (error) {
+    res.status(409).json({ error: error.message });
   }
 };

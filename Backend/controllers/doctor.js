@@ -119,16 +119,27 @@ export const handleBooking = async (req, res) => {
     const { request, result, doctorId } = req.body;
 
     const doctor = await Doctor.findById(doctorId);
+    const patient = await Patient.findById(request.patientId);
 
     const index = doctor.appointmentRequests.indexOf(request);
 
     doctor.appointmentRequests.splice(index, 1);
 
+    const { date, time } = request;
     if (result === "true") {
+      const patientRequest = {
+        date,
+        time,
+        doctorId,
+      };
+      const message = `Your appointment with Dr. ${doctor.fullName} has been confirmed`;
       doctor.appointments.push(request);
+      patient.appointments.push(patientRequest);
+      patient.notifications.push(message);
     }
 
     await doctor.save();
+    await patient.save();
 
     res.status(200).json(doctor);
   } catch (error) {

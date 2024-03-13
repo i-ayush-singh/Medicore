@@ -43,6 +43,7 @@ export const registerPatient = async (req, res) => {
       files: [],
       doctorList: [],
       notifications: [],
+      appointments: [],
     });
     const xyz = await newPatient.save();
 
