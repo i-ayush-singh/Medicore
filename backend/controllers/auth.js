@@ -146,7 +146,6 @@ export const registerDoctor = async (req, res) => {
       picturePath,
       location,
       specialist,
-      language,
       fee,
       timings,
       files: [],

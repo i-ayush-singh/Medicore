@@ -16,7 +16,7 @@ const DoctorSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      min: 5,
+      min: 5, 
     },
     picturePath: {
       type: String,
@@ -48,6 +48,7 @@ const DoctorSchema = new mongoose.Schema(
     timings: {
       type: Array,
       required: true,
+      default :[]
     },
     specialist: {
       type: String,

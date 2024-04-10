@@ -1,12 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
-import { RegisterP } from './components/register/RegisterP';
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SignupP from "./Pages/SignupP.jsx";
+import SignupD from "./Pages/SignupD.jsx";
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
-    <div >
-      <RegisterP/>
-    </div>
+    <Router>
+      <Routes>
+        {/* <Route path="/login/patient"
+        element={<LoginP/>}
+        > */}
+        
+        {/* </Route>
+        <Route path="/login/doctor"
+        element={<LoginD/>}
+        ></Route> */}
+        <Route path="/signup/patient"
+        element={<SignupP/>}
+        ></Route>
+        <Route path="/signup/doctor"
+        element={<SignupD/>}
+        ></Route>
+        {/* <Route path="/"
+        element={<Home/>}
+        ></Route>
+        <Route path="/doctors"
+        element={<Doctors/>}
+        ></Route> */}
+
+      </Routes>
+    </Router>
   );
 }
 
