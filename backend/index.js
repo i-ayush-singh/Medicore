@@ -8,10 +8,12 @@ import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import doctorRoutes from "./routes/doctor.js";
 import patientRoutes from "./routes/patient.js";
+import cors from "cors"
 
 //configuration
 
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT || 3001;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

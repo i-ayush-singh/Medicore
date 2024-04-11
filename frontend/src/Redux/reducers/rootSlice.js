@@ -5,6 +5,7 @@ export const rootReducer = createSlice({
   initialState: {
     loading: true,
     userInfo: {},
+    type:"",
   },
   reducers: {
     setLoading: (state, action) => {
@@ -13,8 +14,11 @@ export const rootReducer = createSlice({
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
     },
+    setType: (state,action) => {
+      state.type = action.payload;
+    }
   },
 });
 
-export const { setLoading, setUserInfo } = rootReducer.actions;
+export const { setLoading, setUserInfo, setType } = rootReducer.actions;
 export default rootReducer.reducer;
