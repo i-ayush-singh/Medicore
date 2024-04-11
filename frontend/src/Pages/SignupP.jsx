@@ -84,10 +84,10 @@ export default function SignupP(){
     }
 
     return(
-        <section className="register-section flex-center">
-            <div className="register-container flex-center">
-                <h2 className="form-heading"> Sign Up Patient</h2>
-                <form onSubmit={formSubmit} className="register-form">
+        <section className="bg-slate-300 h-screen flex justify-center register-section w-full">
+            <div onSubmit={formSubmit} className="register-form flex flex-col justify-center rounded-lg bg-white w-100 text-center py-2 px-4 h-81 mt-20 mb-20">
+            <div class="font-bold text-4xl pt-2 pb-5">Sign Up Patient</div>
+            <div className="px-1 py-1">
                 <input
                     type="text"
                     name="fullName"
@@ -95,7 +95,9 @@ export default function SignupP(){
                     placeholder="Enter your name"
                     value={formdetails.fullName}
                     onChange={inputChange}
-          />
+                    class="w-full px-2 py-1 border rounded border-slate-200"
+          /></div>
+            <div className="px-1 py-1">
                 <input
             type="email"
             name="email"
@@ -103,7 +105,9 @@ export default function SignupP(){
             placeholder="Enter your email"
             value={formdetails.email}
             onChange={inputChange}
-          />
+            class="w-full px-2 py-1 border rounded border-slate-200"
+          /></div>
+                  <div className="px-1 py-1">
           <input
             type="password"
             name="password"
@@ -112,30 +116,45 @@ export default function SignupP(){
             value={formdetails.password}
             onChange={inputChange}
             autoComplete="on"
-          />
+            class="w-full px-2 py-1 border rounded border-slate-200"
+            />
+
+            
+          </div>
+                  <div className="px-1 py-1">
+
+            
+          
+
           <input
             type="text"
             name="location"
             className="form-input"
-            placeholder="location"
+            placeholder="Location"
             value={formdetails.location}
             onChange={inputChange}
-          />
+            class="w-full px-2 py-1 border rounded border-slate-200"
+          /></div>
+                  <div className="px-1 py-1">
           <input
             type="number"
             name="age"
             className="form-input"
-            placeholder="age"
+            placeholder="Age"
             value={formdetails.age}
             onChange={handleAgeChange}
             min="0"
-          />
-          <select value= {formdetails.sex} onChange={handleSexChange}>
+            class="w-full px-2 py-1 border rounded border-slate-200"
+          /></div>
+                  <div className="px-1 py-1">
+          <select value= {formdetails.sex} onChange={handleSexChange} class="w-full px-2 py-1 border rounded border-slate-200">
                 <option value="option1">Male</option>
                 <option value="option2">Female</option>
                 <option value="option3">others</option>
-        </select>
-        <select value={formdetails.blood}  className="form-input" onChange={handleBloodChange}>
+                
+        </select></div>
+        <div className="px-1 py-1">
+        <select value={formdetails.blood}  className="form-input" onChange={handleBloodChange} class="w-full px-2 py-1 border rounded border-slate-200">
                 <option value="A+">A+</option>
                 <option value="B+">B+</option>
                 <option value="O+">O+</option>
@@ -144,10 +163,12 @@ export default function SignupP(){
                 <option value="B-">B-</option>
                 <option value="AB-">AB-</option>
                 <option value="A-">A-</option>
-        </select>
-        <input type="file" onChange={handleFileChange}  />
-        <button onClick={formSubmit}>Register</button>
-                </form>
+                
+        </select></div>
+        <div className="px-1 py-1">
+        <input type="file" onChange={handleFileChange}  class="w-full px-2 py-1 border rounded border-slate-200"/></div>
+        <div className="px-1 py-1">
+        <button onClick={formSubmit} class="w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Register</button></div>
             </div>
         </section>
     )
