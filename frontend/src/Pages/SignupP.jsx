@@ -121,7 +121,7 @@ export default function SignupP(){
             type="text"
             name="location"
             className="form-input"
-            placeholder="location"
+            placeholder="Location"
             value={formdetails.location}
             onChange={inputChange}
             class="w-full px-2 py-1 border rounded border-slate-200"
@@ -131,7 +131,7 @@ export default function SignupP(){
             type="number"
             name="age"
             className="form-input"
-            placeholder="age"
+            placeholder="Age"
             value={formdetails.age}
             onChange={handleAgeChange}
             min="0"
@@ -159,7 +159,7 @@ export default function SignupP(){
         <div className="px-1 py-1">
         <input type="file" onChange={handleFileChange}  class="w-full px-2 py-1 border rounded border-slate-200"/></div>
         <div className="px-1 py-1">
-        <button onClick={formSubmit} class="w-full px-2 py-1 border rounded border-slate-200">Register</button></div>
+        <button onClick={formSubmit} class="w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Register</button></div>
             </div>
         </section>
     )
