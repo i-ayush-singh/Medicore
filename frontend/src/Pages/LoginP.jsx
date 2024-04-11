@@ -10,7 +10,7 @@ export function LoginP(){
     const dispatch = useDispatch();
     const [tt, setTt] = useState("");
     const [formDetails,setFormDetails] = useState({
-        email:"",
+        email: "",
         password:"",
     });
     const inputChange = (e) => {
@@ -41,7 +41,7 @@ export function LoginP(){
             const { data } = await toast.promise(
                 axios.post(`http://localhost:3001/auth/${tt}/login`,{
                     email,
-                    password,
+                    password
                 }
             ),{
                 pending: "Logging in...",

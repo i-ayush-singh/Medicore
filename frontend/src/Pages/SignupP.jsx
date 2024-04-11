@@ -60,6 +60,7 @@ export default function SignupP(){
           formData.append('blood',blood);
           formData.append('age',age);
           formData.append('picturePath',currentFile.name);
+          console.log(formData);
           await toast.promise(
             axios.post("http://localhost:3001/auth/patient/register", formData,{
                 headers : {
@@ -73,7 +74,7 @@ export default function SignupP(){
               loading: "Registering user...",
             }
           );
-           navigate("/login/patient");
+           return navigate("/login/patient");
 
         }catch(error){
             console.log(error);
@@ -110,6 +111,7 @@ export default function SignupP(){
             placeholder="Enter your password"
             value={formdetails.password}
             onChange={inputChange}
+            autoComplete="on"
           />
           <input
             type="text"
