@@ -45,6 +45,7 @@ export default function SignupD(){
           formData.append('specialist',specialist);
           formData.append('fee',fee);
           formData.append('picturePath',currentFile.name);
+          console.log(formData);
           await toast.promise(
             axios.post("http://localhost:3001/auth/doctor/register", formData,{
                 headers : {

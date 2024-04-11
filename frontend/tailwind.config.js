@@ -4,7 +4,15 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+
+    extend: {
+      gridAutoColumns: {
+        '2fr': 'minmax(0, 2fr)',
+      },
+      colors: {
+        'peach': '#E5CBA6',
+      },
+    },
   },
   plugins: [],
 }

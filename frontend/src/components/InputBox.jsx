@@ -1,4 +1,4 @@
-import { SignupD } from "../pages/SignupD"
+
 
 export function InputBox({placeholder}) {
     return <div>
