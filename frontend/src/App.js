@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Toaster/>
       <Routes>
-        <Route path="/login/patient"
+        <Route path="/login"
         element={<LoginP/>}
         >
         
