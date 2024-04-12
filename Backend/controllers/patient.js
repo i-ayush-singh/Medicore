@@ -1,6 +1,34 @@
 import Doctor from "../models/Doctor.js";
 import Patient from "../models/Patient.js";
 
+export const getMyDoctors = async (req, res) => {
+  try {
+    const { patientId } = req.body;
+
+    const patient = Patient.findById(patientId);
+
+    const { doctorList } = patient;
+
+    res.status(200).json(doctorList);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+
+export const getMyReports = async (req, res) => {
+  try {
+    const { patientId } = req.body;
+
+    const patient = Patient.findById(patientId);
+
+    const { doctorList } = patient;
+
+    res.status(200).json(doctorList);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+
 export const requestAppointment = async (req, res) => {
   try {
     const { patientId } = req.body;

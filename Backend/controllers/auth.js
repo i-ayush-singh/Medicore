@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import Patient from "../models/Patient.js";
 import Doctor from "../models/Doctor.js";
 import jwt from "jsonwebtoken";
+import axios from "axios";
 import { z } from "zod";
 
 //registration
@@ -25,18 +26,23 @@ export const registerPatient = async (req, res) => {
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
-    // const locationObj = await axios.get(
-    //   "https://geocode.maps.co/search?q=" +
-    //     location +
-    //     "&api_key=65eee4b0c9e2b147377658rsp5199d9"
-    // );
+    const locationObj = await axios.get(
+      "https://geocode.maps.co/search?q=" +
+        location +
+        "%20india" +
+        "&api_key=65eee4b0c9e2b147377658rsp5199d9"
+    );
 
+    const latitude = locationObj.data[0].lat,
+      longitude = locationObj.data[0].lon;
     const newPatient = new Patient({
       fullName,
       email,
       password: passwordHash,
       picturePath,
       location,
+      latitude,
+      longitude,
       blood,
       age,
       sex,
@@ -134,11 +140,15 @@ export const registerDoctor = async (req, res) => {
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
-    // const locationObj = await axios.get(
-    //   "https://geocode.maps.co/search?q=" +
-    //     location +
-    //     "&api_key=65eee4b0c9e2b147377658rsp5199d9"
-    // );
+    const locationObj = await axios.get(
+      "https://geocode.maps.co/search?q=" +
+        location +
+        "%20india" +
+        "&api_key=65eee4b0c9e2b147377658rsp5199d9"
+    );
+
+    const latitude = locationObj.data[0].lat,
+      longitude = locationObj.data[0].lon;
 
     const newDoctor = new Doctor({
       fullName,
@@ -146,6 +156,8 @@ export const registerDoctor = async (req, res) => {
       password: passwordHash,
       picturePath,
       location,
+      latitude,
+      longitude,
       specialist,
       fee,
       timings,
