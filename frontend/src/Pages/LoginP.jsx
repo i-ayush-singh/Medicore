@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios"
 import toast from "react-hot-toast";
@@ -50,15 +50,18 @@ export function LoginP(){
                 loading: "Logging user...",
             }
         );
-        localStorage.setItem("token",data.sessionToken);
+        localStorage.setItem('token',JSON.stringify(data.sessionToken));
+        localStorage.setItem('user',JSON.stringify(data.requiredUser));
+        console.log(data.requiredUser);
         dispatch(setUserInfo(data.requiredUser));
+       
         dispatch(setType(tt));
         setFormDetails({
             email:"",
             password:"",
         })
         setTt("");
-        navigate('/');
+        navigate('/dashboard');
 
         }catch(error){
             return error;
@@ -66,12 +69,19 @@ export function LoginP(){
     };
 
     return(
+
         <section className="bg-slate-300 h-screen flex justify-center w-full">
             <div onSubmit={formsubmit} className="flex flex-col justify-center rounded-lg bg-white w-1/3 text-center px-8 py-0 h-3/4 mt-20 mb-20">
             <div class="font-bold text-4xl py-10">Login</div>
             <div className="px-4 py-4">
                 <input type ="email" name = "email" placeholder = "Enter your Email" value = {formDetails.email} onChange = {inputChange} class="w-full px-2 py-1 border rounded border-slate-200"/></div>
                 <div className="px-4 py-4"><input
+
+        <div>
+            <form onSubmit={formsubmit}>
+                <input type ="email" name = "email" placeholder = "enter your email" value = {formDetails.email} onChange = {inputChange} />
+                <input
+
             type="password"
             name="password"
             placeholder="Enter your password"

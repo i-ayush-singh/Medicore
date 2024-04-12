@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignupP from "./Pages/SignupP.jsx";
 import SignupD from "./Pages/SignupD.jsx";
-
+import { Sidebar } from "./Components/SidebarD.jsx";
 import { Landing } from './Pages/Landing/Landing';
 import { LoginP } from "./Pages/LoginP.jsx";
-
+import { Dashboard } from "./Pages/Dasboard/Dashboard.jsx";
 import { Toaster } from "react-hot-toast";
 function App() {
   return (
@@ -16,9 +16,9 @@ function App() {
         >
         
         </Route>
-        {/* <Route path="/login/doctor"
-        element={<LoginD/>}
-        ></Route> */}
+        <Route path="/dashboard"
+        element={<Dashboard/>}
+        ></Route>
         <Route path="/"
         element = {<Landing/>}></Route>
         <Route path="/signup/patient"
