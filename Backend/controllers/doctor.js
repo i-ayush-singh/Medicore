@@ -3,35 +3,43 @@ import Patient from "../models/Patient.js";
 import Report from "../models/Report.js";
 
 export const getDoctors = async (req, res) => {
-  const filter = req.query.filter || "";
-  const Doctors = await Doctor.find({
-    $or: [
-      {
-        specialist: {
-          $regex: filter,
+  try {
+    const filter = req.query.filter || "";
+    const doctors = await Doctor.find({
+      $or: [
+        {
+          specialist: {
+            $regex: filter,
+          },
         },
-      },
-      {
-        location: {
-          $regex: filter,
+        {
+          location: {
+            $regex: filter,
+          },
         },
-      },
-      {
-        fullName: {
-          $regex: filter,
+        {
+          fullName: {
+            $regex: filter,
+          },
         },
-      },
-    ],
-  });
+      ],
+    });
+    const newDoctors = [];
+    doctors.map((doc) => {
+      newDoctors.push(doc);
+    });
 
-  res.status(200).json({
-    Doctors: Doctors.map((doc) => ({
-      fullName: doc.fullName,
-      _id: doc._id,
-      location: doc.location,
-      specialist: doc.specialist,
-    })),
-  });
+    res.status(200).json({
+      doctors: newDoctors.map((doc) => ({
+        fullName: doc.fullName,
+        _id: doc._id,
+        location: doc.location,
+        specialist: doc.specialist,
+      })),
+    });
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
 };
 
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
@@ -75,7 +83,7 @@ export const getDoctorsByDistance = async (req, res) => {
 
     newDoctors.sort((a, b) => a.distance - b.distance);
     res.status(200).json({
-      newDoctors: Doctors.map((doc) => ({
+      doctors: newDoctors.map((doc) => ({
         fullName: doc.fullName,
         _id: doc._id,
         location: doc.location,
@@ -92,7 +100,7 @@ export const getDoctor = async (req, res) => {
   try {
     const { doctorId } = req.body;
 
-    const doctor = Doctor.findById(doctorId);
+    const doctor = await Doctor.findById(doctorId);
 
     res.status(201).json(doctor);
   } catch (error) {
