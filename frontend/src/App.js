@@ -4,7 +4,7 @@ import SignupD from "./Pages/SignupD.jsx";
 import { Sidebar } from "./Components/SidebarD.jsx";
 import { Landing } from './Pages/Landing/Landing';
 import { LoginP } from "./Pages/LoginP.jsx";
-
+import { Dashboard } from "./Pages/Dasboard/Dashboard.jsx";
 import { Toaster } from "react-hot-toast";
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         
         </Route>
         <Route path="/dashboard"
-        element={<Sidebar/>}
+        element={<Dashboard/>}
         ></Route>
         <Route path="/"
         element = {<Landing/>}></Route>
