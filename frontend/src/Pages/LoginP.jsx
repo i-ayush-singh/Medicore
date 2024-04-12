@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios"
 import toast from "react-hot-toast";
@@ -50,15 +50,18 @@ export function LoginP(){
                 loading: "Logging user...",
             }
         );
-        localStorage.setItem("token",data.sessionToken);
+        localStorage.setItem('token',JSON.stringify(data.sessionToken));
+        localStorage.setItem('user',JSON.stringify(data.requiredUser));
+        console.log(data.requiredUser);
         dispatch(setUserInfo(data.requiredUser));
+       
         dispatch(setType(tt));
         setFormDetails({
             email:"",
             password:"",
         })
         setTt("");
-        navigate('/');
+        navigate('/dashboard');
 
         }catch(error){
             return error;
@@ -68,7 +71,6 @@ export function LoginP(){
     return(
         <div>
             <form onSubmit={formsubmit}>
-            
                 <input type ="email" name = "email" placeholder = "enter your email" value = {formDetails.email} onChange = {inputChange} />
                 <input
             type="password"

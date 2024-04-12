@@ -9,10 +9,14 @@ export const rootReducer = createSlice({
   },
   reducers: {
     setLoading: (state, action) => {
+        
       state.loading = action.payload;
     },
     setUserInfo: (state, action) => {
+    console.log('payload');
+    
       state.userInfo = action.payload;
+
     },
     setType: (state,action) => {
       state.type = action.payload;

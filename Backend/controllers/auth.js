@@ -89,7 +89,8 @@ export const loginPatient = async (req, res) => {
 export const loginDoctor = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    console.log(email);
+    console.log(email);
     const requiredUser = await Doctor.findOne({ email: email });
 
     if (!requiredUser) {
