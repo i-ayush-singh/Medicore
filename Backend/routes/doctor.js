@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  getDoctors,
   getDoctor,
   handleRequest,
   createReport,
@@ -9,7 +10,8 @@ import {
 import { verifyToken } from "../middleware/auth.js";
 const router = express.Router();
 
-router.get("/fetchAll", verifyToken, getDoctor);
+router.get("/fetchAll", verifyToken, getDoctors);
+router.get("getDoctor/:doctorId", verifyToken, getDoctor);
 router.get("/fetchByDistance", verifyToken, getDoctorsByDistance);
 router.patch("/request/:patientId", verifyToken, handleRequest);
 router.post("/createReport", verifyToken, createReport);
