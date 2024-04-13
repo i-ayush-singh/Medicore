@@ -1,4 +1,4 @@
-import Doctor from "../models/Doctor.js";
+import Doctor from "../models/doctor.js";
 import Patient from "../models/Patient.js";
 
 export const getMyDoctors = async (req, res) => {

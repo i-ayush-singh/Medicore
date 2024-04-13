@@ -61,7 +61,12 @@ export function LoginP(){
             password:"",
         })
         setTt("");
-        navigate('/dashboard');
+        if(tt == "doctor"){
+            navigate('/dashboard');
+        }
+        else{
+            navigate('/dashboardP');
+        }
 
         }catch(error){
             return error;
