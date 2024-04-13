@@ -10,8 +10,8 @@ export function Landing() {
     <div className="m-0 p-0 h-screen">
       <Header />
       <div className="grid  m-0 p-0 h-full">
-        <div className="bg-cover bg-no-repeat" style={{ backgroundImage: `url(${image})` }}>
-          <div className=" ps-8 pt-5 text-7xl font-bold bg-gradient-to-r from-purple-600 via-green-500  to-purple-600 inline-block text-transparent bg-clip-text">
+        <div className="bg-cover bg-no-repeat" style={{ backgroundImage: `url(${image})` }}><br/><br/>
+          <div className=" ps-8 pt-10 text-7xl font-bold bg-gradient-to-r from-purple-600 via-green-500  to-purple-600 inline-block text-transparent bg-clip-text">
             Medical & <br/> Health Care <br/> 
           </div>
           <div className="ps-8 text-7xl font-bold">Services</div>
