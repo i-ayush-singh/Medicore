@@ -37,7 +37,8 @@ export const Doctors = () =>{
     // )
 
     return (
-          <div class="flex flex-col-2 p-3">
+      <div class="bg-gray-200">
+          <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
           {doctors.map((ele) => {
               return (
                 <div class="p-3">
@@ -47,5 +48,6 @@ export const Doctors = () =>{
               );
             })}
           </div>
+      </div>
       )
   }
