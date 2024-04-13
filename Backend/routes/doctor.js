@@ -11,7 +11,7 @@ import { verifyToken } from "../middleware/auth.js";
 const router = express.Router();
 
 router.get("/fetchAll", verifyToken, getDoctors);
-router.get("getDoctor/:doctorId", verifyToken, getDoctor);
+router.get("/:doctorId", verifyToken, getDoctor);
 router.get("/fetchByDistance", verifyToken, getDoctorsByDistance);
 router.patch("/request/:patientId", verifyToken, handleRequest);
 router.post("/createReport", verifyToken, createReport);

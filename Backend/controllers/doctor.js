@@ -98,7 +98,7 @@ export const getDoctorsByDistance = async (req, res) => {
 
 export const getDoctor = async (req, res) => {
   try {
-    const { doctorId } = req.body;
+    const { doctorId } = req.params;
 
     const doctor = await Doctor.findById(doctorId);
 
