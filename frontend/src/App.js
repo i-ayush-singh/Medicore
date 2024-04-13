@@ -6,6 +6,7 @@ import { Landing } from './Pages/Landing/Landing';
 import { LoginP } from "./Pages/LoginP.jsx";
 import { Dashboard } from "./Pages/Dasboard/Dashboard.jsx";
 import { Toaster } from "react-hot-toast";
+import { Doctors } from "./Pages/doctors.jsx";
 function App() {
   return (
     <Router>
@@ -29,10 +30,10 @@ function App() {
         ></Route>
         {/* <Route path="/"
         element={<Home/>}
-        ></Route>
+        ></Route> */}
         <Route path="/doctors"
         element={<Doctors/>}
-        ></Route> */}
+        ></Route>
 
       </Routes>
     </Router>
