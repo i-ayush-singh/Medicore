@@ -59,7 +59,7 @@ export default function SignupD(){
               loading: "Registering user...",
             }
           );
-          return navigate("/login/doctor");
+          return navigate("/login");
 
         }catch(error){
             console.log(error);
