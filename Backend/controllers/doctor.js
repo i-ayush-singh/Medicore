@@ -30,12 +30,7 @@ export const getDoctors = async (req, res) => {
     });
 
     res.status(200).json({
-      doctors: newDoctors.map((doc) => ({
-        fullName: doc.fullName,
-        _id: doc._id,
-        location: doc.location,
-        specialist: doc.specialist,
-      })),
+      doctors: newDoctors
     });
   } catch (error) {
     res.status(404).json({ error: error.message });
