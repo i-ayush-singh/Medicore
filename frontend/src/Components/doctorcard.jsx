@@ -1,47 +1,32 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 export const DoctorCard = ({ ele }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [token, setToken] = useState(localStorage.getItem("token") || "");
+    const navigate = useNavigate();
+    const id = ele._id;
     const handleModal = () => {
         if (token === "") {
           return toast.error("You must log in first");
         }
         setModalOpen(true);
       };
-      // return (
-      //   <div>
-      //        <img
-      //       alt = "doctor"
-      //       src = {`http://localhost:3001/assets/${ele.picturePath}`}
-      //       />
-      //       <div>
-      //           {ele.fullName}
-      //       </div>
-      //       <div>
-      //           {ele.specialist}
-      //       </div>
-      //       <div>
-      //           {/* {ele.fee} */}
-      //       </div>
-
-      //   </div>
-        
-
-      // )
-
-
+   function move(){
+    console.log("HI");
+    navigate(`/doctor/${id}`);
+   }
 
   return(   
-<div className="w-full max-w-sm bg-slate-400 border border-gray-200 rounded-lg shadow dark:border-gray-700">
+<div onClick = {move}className="w-full max-w-sm bg-slate-400 border border-gray-200 rounded-lg shadow dark:border-gray-700">
         <img class="p-8 rounded-t-lg w-full h-56" src={`http://localhost:3001/assets/${ele.picturePath}`} alt="doctor" />
     <div class="px-5 pb-5">
-        <a href="#">
+        
             <h5 class="text-xl font-semibold tracking-tight text-black-700 dark:text-white">{ele.fullName.toUpperCase()}</h5>
-        </a>
-        <a href="#">
+        
+        
             <h5 class="text-xl font-semibold tracking-tight text-black-700 dark:text-white">{ele.specialist.toUpperCase()}</h5>
-        </a>
         <div class="flex items-center mt-2.5 mb-5">
             <div class="flex items-center space-x-1 rtl:space-x-reverse">
                 <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">

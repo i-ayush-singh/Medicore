@@ -44,6 +44,7 @@ export const Doctors = () =>{
                 <div class="p-3">
                 <DoctorCard
                   ele={ele}
+                  key = {ele._id}
                 /></div>
               );
             })}
