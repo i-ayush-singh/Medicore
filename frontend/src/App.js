@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignupP from "./Pages/SignupP.jsx";
 import SignupD from "./Pages/SignupD.jsx";
-import { Sidebar } from "./Components/SidebarD.jsx";
+import { Sidebar } from "./components/SidebarD.jsx";
 import { Landing } from './Pages/Landing/Landing';
 import { LoginP } from "./Pages/LoginP.jsx";
 import { Dashboard } from "./Pages/Dasboard/Dashboard.jsx";

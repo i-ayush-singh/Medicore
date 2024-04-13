@@ -1,4 +1,4 @@
-import { DoctorCard } from "../Components/doctorcard";
+import {DoctorCard} from "../components/doctorcard"
 import React, { useState , useEffect } from "react";
 import axios from "axios"
 
@@ -23,16 +23,29 @@ export const Doctors = () =>{
         fetchAllDocs();
       }, []);
       console.log(doctors)
-    return (
-        <div>
-        {doctors.map((ele) => {
-            return (
-              <DoctorCard
-                ele={ele}
+    // return (
+    //     <div>
+    //     {doctors.map((ele) => {
+    //         return (
+    //           <DoctorCard
+    //             ele={ele}
                 
-              />
-            );
-          })}
-        </div>
-    )
-}
+    //           />
+    //         );
+    //       })}
+    //     </div>
+    // )
+
+    return (
+          <div class="flex flex-col-2 p-3">
+          {doctors.map((ele) => {
+              return (
+                <div class="p-3">
+                <DoctorCard
+                  ele={ele}
+                /></div>
+              );
+            })}
+          </div>
+      )
+  }
