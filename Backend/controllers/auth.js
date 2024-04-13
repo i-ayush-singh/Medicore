@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import Patient from "../models/Patient.js";
-import Doctor from "../models/Doctor.js";
+import Doctor from "../models/doctor.js";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import { z } from "zod";
