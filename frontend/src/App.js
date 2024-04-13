@@ -7,6 +7,7 @@ import { LoginP } from "./Pages/LoginP.jsx";
 import { Dashboard } from "./Pages/Dasboard/Dashboard.jsx";
 import { Toaster } from "react-hot-toast";
 import { Doctors } from "./Pages/doctors.jsx";
+import { DashboardP } from "./Pages/Dasboard/DashboardP.jsx";
 function App() {
   return (
     <Router>
@@ -33,6 +34,9 @@ function App() {
         ></Route> */}
         <Route path="/doctors"
         element={<Doctors/>}
+        ></Route>
+        <Route path="/dashboardP"
+        element={<DashboardP/>}
         ></Route>
 
       </Routes>
