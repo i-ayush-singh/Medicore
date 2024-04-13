@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignupP from "./Pages/SignupP.jsx";
 import SignupD from "./Pages/SignupD.jsx";
-import { Sidebar } from "./Components/SidebarD.jsx";
+import { Sidebar } from "./components/SidebarD.jsx";
 import { Landing } from './Pages/Landing/Landing';
 import { LoginP } from "./Pages/LoginP.jsx";
 import { Dashboard } from "./Pages/Dasboard/Dashboard.jsx";
 import { Toaster } from "react-hot-toast";
+import { Doctors } from "./Pages/doctors.jsx";
 function App() {
   return (
     <Router>
@@ -29,10 +30,10 @@ function App() {
         ></Route>
         {/* <Route path="/"
         element={<Home/>}
-        ></Route>
+        ></Route> */}
         <Route path="/doctors"
         element={<Doctors/>}
-        ></Route> */}
+        ></Route>
 
       </Routes>
     </Router>

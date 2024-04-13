@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import Patient from "../models/Patient.js";
-import Doctor from "../models/Doctor.js";
+import Doctor from "../models/doctor.js";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import { z } from "zod";
@@ -63,7 +63,7 @@ export const registerPatient = async (req, res) => {
 
 export const loginPatient = async (req, res) => {
   try {
-    const { email , password } = req.body;
+    const { email, password } = req.body;
     console.log(email);
     const requiredUser = await Patient.findOne({ email: email });
 
@@ -165,6 +165,7 @@ export const registerDoctor = async (req, res) => {
       requests: [],
       appointmentRequests: [],
       appointments: [],
+      reviews: new Map(),
     });
 
     emailSchema.parse(newDoctor);

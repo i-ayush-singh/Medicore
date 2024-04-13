@@ -1,4 +1,4 @@
-import Doctor from "../models/Doctor.js";
+import Doctor from "../models/doctor.js";
 import Patient from "../models/Patient.js";
 
 export const getMyDoctors = async (req, res) => {
@@ -106,6 +106,34 @@ export const handleNotifications = async (req, res) => {
     await patient.save();
 
     res.status(200).json(patient);
+  } catch (error) {
+    res.status(409).json({ error: error.message });
+  }
+};
+
+export const makeReview = async (req, res) => {
+  try {
+    const { rating, comment, patientId } = req.body;
+    const { doctorId } = req.params;
+
+    const doctor = await Doctor.findById(doctorId);
+
+    if (doctor.patientList.indexOf(patientId) == -1) {
+      return res.status(407).json({
+        error: "It seems you've not been assigned to this doctor yet",
+      });
+    }
+
+    const reviewObj = {
+      rating,
+      comment,
+    };
+
+    doctor.reviews.set(patientId, reviewObj);
+
+    await doctor.save();
+
+    res.status(204).json(doctor);
   } catch (error) {
     res.status(409).json({ error: error.message });
   }
