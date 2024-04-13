@@ -6,6 +6,7 @@ import {
   createReport,
   handleBooking,
   getDoctorsByDistance,
+  checkRequest,
 } from "../controllers/doctor.js";
 import { verifyToken } from "../middleware/auth.js";
 const router = express.Router();
@@ -14,6 +15,7 @@ router.get("/fetchAll", verifyToken, getDoctors);
 router.get("/:doctorId", verifyToken, getDoctor);
 router.get("/fetchByDistance", verifyToken, getDoctorsByDistance);
 router.patch("/request/:patientId", verifyToken, handleRequest);
+router.get("/checkRequest/:doctorId/:patientId", verifyToken, checkRequest);
 router.post("/createReport", verifyToken, createReport);
 router.patch("/booking", verifyToken, handleBooking);
 

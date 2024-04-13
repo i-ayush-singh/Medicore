@@ -30,7 +30,7 @@ export const getDoctors = async (req, res) => {
     });
 
     res.status(200).json({
-      doctors: newDoctors
+      doctors: newDoctors,
     });
   } catch (error) {
     res.status(404).json({ error: error.message });
@@ -116,7 +116,7 @@ export const handleRequest = async (req, res) => {
 
     if (result === "true") {
       doctor.patientList.push(patientId);
-
+      patient.doctorList.push(doctorId);
       const basicInformation = [
         `Name: ${patient.fullName}`,
         `Email: ${patient.email}`,
@@ -147,6 +147,22 @@ export const handleRequest = async (req, res) => {
     await doctor.save();
 
     res.status(200).json(doctor);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+
+export const checkRequest = async (req, res) => {
+  try {
+    const { patientId, doctorId } = req.params;
+
+    const doctor = await Doctor.findById(doctorId);
+    let exists = false;
+    if (doctor.requests.indexOf(patientId) != -1) {
+      exists = true;
+    }
+
+    res.status(200).json({ result: exists });
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
