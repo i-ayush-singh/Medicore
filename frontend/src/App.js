@@ -20,7 +20,7 @@ function App() {
         element={<LoginP/>}
         >
         </Route>
-        <Route path="/doctor/:doctorId" element={ProfilePage}></Route>
+        <Route path="/doctor/:doctorId" element={<ProfilePage/>}></Route>
         <Route path="/dashboard"
         element={<Dashboard/>}
         ></Route>
