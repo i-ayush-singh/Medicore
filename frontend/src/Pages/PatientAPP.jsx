@@ -16,6 +16,7 @@ export function PatientAPP() {
               },
           });
 
+
           setAppointments(app.data);
       } catch(error){
           console.log(error);
