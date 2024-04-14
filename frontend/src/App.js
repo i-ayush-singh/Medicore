@@ -8,7 +8,8 @@ import { Dashboard } from "./Pages/Dasboard/Dashboard.jsx";
 import { Toaster } from "react-hot-toast";
 import { Doctors } from "./Pages/doctors.jsx";
 import { DashboardP } from "./Pages/Dasboard/DashboardP.jsx";
-
+import { Notifications } from "./components/Notifications.jsx"
+import { PatientAPP } from "./Pages/PatientAPP.jsx"
 
 
 import { ProfilePage } from "./Pages/Doctor/Doctor_Desciption.jsx";
@@ -45,7 +46,12 @@ function App() {
         <Route path="/dashboardP"
         element={<DashboardP/>}
         ></Route>
-       
+        <Route path="/PatientAPP"
+        element={<PatientAPP/>}
+        ></Route>
+        <Route path="/notifications"
+        element={<Notifications/>}
+        ></Route>
 
       </Routes>
     </Router>

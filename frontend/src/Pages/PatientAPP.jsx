@@ -6,8 +6,6 @@ import axios from "axios";
 export function PatientAPP() {
     const TABLE_HEAD = ["Doctor Id", "Speacialist", "Date", "Time", "Status", "Report"];
 
-
-   
 const TABLE_ROWS = [
   {
     id: "00201562435",
