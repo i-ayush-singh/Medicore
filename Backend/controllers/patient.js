@@ -1,21 +1,21 @@
+import { application } from "express";
 import Doctor from "../models/doctor.js";
 import Patient from "../models/Patient.js";
+// Assuming your _id value is stored in a variable called idValue
+
+const processor = async (doctorId) => {
+  return await Doctor.findById(doctorId);
+};
 
 export const getMyDoctors = async (req, res) => {
   try {
     const { patientId } = req.params;
 
-    const patient = Patient.findById(patientId);
+    const patient = await Patient.findById(patientId);
 
     const { doctorList } = patient;
 
-    const doctors = [];
-
-    doctorList.map(async (doctorId) => {
-      const doctor = await Doctor.findById(doctorId);
-
-      doctors.push(doctor);
-    });
+    const doctors = await Promise.all(doctorList.map(processor));
 
     res.status(200).json(doctors);
   } catch (error) {
@@ -39,6 +39,13 @@ export const getMyReports = async (req, res) => {
 
 export const getReport = async (req, res) => {
   try {
+    const { doctorId, patientId } = req.params;
+
+    const patient = await Patient.findById(patientId);
+
+    const report = patient.files.get(doctorId);
+
+    res.status(200).json(report);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
@@ -104,6 +111,38 @@ export const bookAppointment = async (req, res) => {
     res.status(200).json(doctor);
   } catch (error) {
     res.status(409).json({ message: error.message });
+  }
+};
+
+export const getAppointments = async (req, res) => {
+  try {
+    const { patientId } = req.params;
+    const patient = await Patient.findById(patientId);
+
+    const appointments = await Promise.all(
+      patient.appointments.map(async (appointmentObj) => {
+        const { date, time } = appointmentObj;
+        const doctor = await Doctor.findById(appointmentObj.doctorId);
+       
+        const { fullName, picturePath, files, specialist } = doctor;
+        const newObj = {
+          date,
+          time,
+          doctor: {
+            fullName,
+            picturePath,
+            files,
+            specialist,
+          },
+        };
+
+        return newObj;
+      })
+    );
+
+    res.status(200).json(appointments);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 };
 
