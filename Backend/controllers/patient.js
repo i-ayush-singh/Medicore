@@ -5,7 +5,7 @@ export const getMyDoctors = async (req, res) => {
   try {
     const { patientId } = req.params;
 
-    const patient = Patient.findById(patientId);
+    const patient = await Patient.findById(patientId);
 
     const { doctorList } = patient;
 
@@ -39,6 +39,13 @@ export const getMyReports = async (req, res) => {
 
 export const getReport = async (req, res) => {
   try {
+    const { doctorId, patientId } = req.params;
+
+    const patient = await Patient.findById(patientId);
+
+    const report = patient.files.get(doctorId);
+
+    res.status(200).json(report);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
