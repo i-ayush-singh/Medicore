@@ -1,6 +1,7 @@
 import { application } from "express";
 import Doctor from "../models/doctor.js";
 import Patient from "../models/Patient.js";
+// Assuming your _id value is stored in a variable called idValue
 
 const processor = async (doctorId) => {
   return await Doctor.findById(doctorId);
@@ -116,14 +117,13 @@ export const bookAppointment = async (req, res) => {
 export const getAppointments = async (req, res) => {
   try {
     const { patientId } = req.params;
-
     const patient = await Patient.findById(patientId);
 
     const appointments = await Promise.all(
       patient.appointments.map(async (appointmentObj) => {
         const { date, time } = appointmentObj;
         const doctor = await Doctor.findById(appointmentObj.doctorId);
-
+       
         const { fullName, picturePath, files, specialist } = doctor;
         const newObj = {
           date,
