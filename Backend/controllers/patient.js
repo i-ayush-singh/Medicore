@@ -1,6 +1,10 @@
 import Doctor from "../models/doctor.js";
 import Patient from "../models/Patient.js";
 
+const processor = async (doctorId) => {
+  return await Doctor.findById(doctorId);
+}
+
 export const getMyDoctors = async (req, res) => {
   try {
     const { patientId } = req.params;
@@ -9,13 +13,7 @@ export const getMyDoctors = async (req, res) => {
 
     const { doctorList } = patient;
 
-    const doctors = [];
-
-    doctorList.map(async (doctorId) => {
-      const doctor = await Doctor.findById(doctorId);
-
-      doctors.push(doctor);
-    });
+    const doctors = await Promise.all(doctorList.map(processor));
 
     res.status(200).json(doctors);
   } catch (error) {

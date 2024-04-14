@@ -9,7 +9,7 @@ import { Toaster } from "react-hot-toast";
 import { Doctors } from "./Pages/doctors.jsx";
 import { DashboardP } from "./Pages/Dasboard/DashboardP.jsx";
 
-
+import { MyDoctors } from "./Pages/Mydoctors.jsx";
 
 import { ProfilePage } from "./Pages/Doctor/Doctor_Desciption.jsx";
 
@@ -44,6 +44,9 @@ function App() {
         ></Route>
         <Route path="/dashboardP"
         element={<DashboardP/>}
+        ></Route>
+        <Route path="/MyDoctors"
+        element={<MyDoctors/>}
         ></Route>
        
 
