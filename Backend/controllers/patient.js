@@ -3,13 +3,21 @@ import Patient from "../models/Patient.js";
 
 export const getMyDoctors = async (req, res) => {
   try {
-    const { patientId } = req.body;
+    const { patientId } = req.params;
 
     const patient = Patient.findById(patientId);
 
     const { doctorList } = patient;
 
-    res.status(200).json(doctorList);
+    const doctors = [];
+
+    doctorList.map(async (doctorId) => {
+      const doctor = await Doctor.findById(doctorId);
+
+      doctors.push(doctor);
+    });
+
+    res.status(200).json(doctors);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
@@ -17,7 +25,7 @@ export const getMyDoctors = async (req, res) => {
 
 export const getMyReports = async (req, res) => {
   try {
-    const { patientId } = req.body;
+    const { patientId } = req.params;
 
     const patient = Patient.findById(patientId);
 
@@ -29,6 +37,12 @@ export const getMyReports = async (req, res) => {
   }
 };
 
+export const getReport = async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
 export const requestAppointment = async (req, res) => {
   try {
     const { patientId } = req.body;
@@ -124,13 +138,24 @@ export const makeReview = async (req, res) => {
       });
     }
 
+    const ratingObj = doctor.rating;
     const reviewObj = {
       rating,
       comment,
     };
 
+    if (doctor.reviews.get(patientId) === undefined) {
+      ratingObj.number++;
+      ratingObj.total += rating;
+    } else {
+      const oldRatingObj = doctor.reviews.get(patientId);
+
+      ratingObj.total -= oldRatingObj.rating;
+      ratingObj.total += rating;
+    }
     doctor.reviews.set(patientId, reviewObj);
 
+    doctor.rating = ratingObj;
     await doctor.save();
 
     res.status(204).json(doctor);
