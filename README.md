@@ -1,3 +1,3 @@
 # Medicore
 
-It's a  fucking
+It's a  medical website
