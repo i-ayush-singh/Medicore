@@ -14,6 +14,7 @@ import { MyDoctors } from "./Pages/Mydoctors.jsx";
 import { ProfilePage } from "./Pages/Doctor/Doctor_Desciption.jsx";
 
 import { Navbar } from "./components/Navbar.jsx";
+import { PatientAPP } from "./Pages/PatientAPP.jsx";
 
 function App() {
   return (
@@ -47,6 +48,9 @@ function App() {
         ></Route>
         <Route path="/MyDoctors"
         element={<MyDoctors/>}
+        ></Route>
+         <Route path="/patientapp"
+        element={<PatientAPP/>}
         ></Route>
        
 

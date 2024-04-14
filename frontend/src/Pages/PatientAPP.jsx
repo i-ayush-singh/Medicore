@@ -4,52 +4,30 @@ import axios from "axios";
 
  
 export function PatientAPP() {
-    const TABLE_HEAD = ["Doctor Id", "Speacialist", "Date", "Time", "Status", "Report"];
+    const TABLE_HEAD = ["Doctor Name", "Speacialist", "Date", "Time", "Status", "Report"];
+    const xyz = JSON.parse(localStorage.getItem('user'));
+    const patientId = xyz._id;
+    const [appointments,setAppointments] = useState([]);
+    const fetchAllapp = async () => {
+      try{
+          let app = await axios.get(`http://localhost:3001/patient/getAppointments/${patientId}`, {
+              headers: {
+                  'Authorization': "Bearer " + localStorage.getItem('token').slice(1,-1),
+              },
+          });
 
+          setAppointments(app.data);
+      } catch(error){
+          console.log(error);
+      }
 
+     
+    };
+  useEffect(() => {
+      fetchAllapp();
+    }, []);
    
-const TABLE_ROWS = [
-  {
-    id: "00201562435",
-    job: "Eye",
-    date: "23/04/18",
-    time: "7:00",
-    status: "No",
-    report: "...."
-  },
-  {
-    id: "00201562435",
-    job: "Eye",
-    date: "23/04/18",
-    time: "7:00",
-    status: "No",
-    report: "...."
-  },
-  {
-    id: "00201562435",
-    job: "Eye",
-    date: "23/04/18",
-    time: "7:00",
-    status: "No",
-    report: "...."
-  },
-  {
-    id: "00201562435",
-    job: "Eye",
-    date: "23/04/18",
-    time: "7:00",
-    status: "No",
-    report: "...."
-  },
-  {
-    id: "00201562435",
-    job: "Eye",
-    date: "23/04/18",
-    time: "7:00",
-    status: "No",
-    report: "...."
-  },
-];
+
   return (
     <div>
     <Card className="h-full w-full overflow-scroll p-10 justify-center">
@@ -70,20 +48,20 @@ const TABLE_ROWS = [
           </tr>
         </thead>
         <tbody>
-          {TABLE_ROWS.map(({id , job, date, time, status, report }, index) => {
-            const isLast = index === TABLE_ROWS.length - 1;
+          {appointments.map(({date,time,doctor }, index) => {
+            const isLast = index === appointments.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
  
             return (
-              <tr key={id}>
+              <tr key={doctor._id}>
                 <td className={classes}>
                   <Typography variant="small" color="blue-gray" className="font-normal">
-                    {id}
+                    {doctor.fullName}
                   </Typography>
                 </td>
                 <td className={`${classes} bg-blue-gray-50/50`}>
                   <Typography variant="small" color="blue-gray" className="font-normal">
-                    {job}
+                    {doctor.specialist}
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -98,13 +76,13 @@ const TABLE_ROWS = [
                 </td>
                 <td className={classes}>
                   <Typography variant="small" color="blue-gray" className="font-normal">
-                    {status}
+                    Accepted
                   </Typography>
                 </td>
                 <td className={`${classes} bg-blue-gray-50/50`}>
-                  <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium">
-                    {report}
-                  </Typography>
+                  <button as="a" href="#" variant="small" color="blue-gray" className="font-medium">
+                    report
+                  </button>
                 </td>
               </tr>
             );
