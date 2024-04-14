@@ -9,7 +9,11 @@ import { Toaster } from "react-hot-toast";
 import { Doctors } from "./Pages/doctors.jsx";
 import { DashboardP } from "./Pages/Dasboard/DashboardP.jsx";
 
+
+
 import { ProfilePage } from "./Pages/Doctor/Doctor_Desciption.jsx";
+
+import { Navbar } from "./components/Navbar.jsx";
 
 function App() {
   return (
@@ -32,15 +36,16 @@ function App() {
         <Route path="/signup/doctor"
         element={<SignupD/>}
         ></Route>
-        {/* <Route path="/"
-        element={<Home/>}
-        ></Route> */}
+        <Route path="/home"
+        element={<Navbar/>}
+        ></Route>
         <Route path="/doctors"
         element={<Doctors/>}
         ></Route>
         <Route path="/dashboardP"
         element={<DashboardP/>}
         ></Route>
+       
 
       </Routes>
     </Router>
