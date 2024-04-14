@@ -71,6 +71,13 @@ const DoctorSchema = new mongoose.Schema(
       type: Map,
       of: Object,
     },
+    rating: {
+      type: Object,
+      default: {
+        total: 0,
+        number: 0,
+      },
+    },
   },
   { timestamps: true }
 );
