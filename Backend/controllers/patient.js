@@ -1,9 +1,10 @@
+import { application } from "express";
 import Doctor from "../models/doctor.js";
 import Patient from "../models/Patient.js";
 
 const processor = async (doctorId) => {
   return await Doctor.findById(doctorId);
-}
+};
 
 export const getMyDoctors = async (req, res) => {
   try {
@@ -109,6 +110,39 @@ export const bookAppointment = async (req, res) => {
     res.status(200).json(doctor);
   } catch (error) {
     res.status(409).json({ message: error.message });
+  }
+};
+
+export const getAppointments = async (req, res) => {
+  try {
+    const { patientId } = req.params;
+
+    const patient = await Patient.findById(patientId);
+
+    const appointments = await Promise.all(
+      patient.appointments.map(async (appointmentObj) => {
+        const { date, time } = appointmentObj;
+        const doctor = await Doctor.findById(appointmentObj.doctorId);
+
+        const { fullName, picturePath, files, specialist } = doctor;
+        const newObj = {
+          date,
+          time,
+          doctor: {
+            fullName,
+            picturePath,
+            files,
+            specialist,
+          },
+        };
+
+        return newObj;
+      })
+    );
+
+    res.status(200).json(appointments);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 };
 
