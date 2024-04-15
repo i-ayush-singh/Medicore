@@ -71,7 +71,9 @@ export const bookAppointment = async (req, res) => {
   try {
     const { doctorId } = req.params;
     const { patientId, time, date } = req.body;
-
+    console.log(patientId);
+    console.log(time);
+    console.log(date);
     const doctor = await Doctor.findById(doctorId);
     const patient = await Patient.findById(patientId);
 
@@ -81,7 +83,7 @@ export const bookAppointment = async (req, res) => {
       });
     }
     const { timings } = doctor;
-
+    console.log(timings);
     const patientTime = parseInt(time);
     const startTime = parseInt(timings[0]),
       endTime = parseInt(timings[1]);
@@ -149,12 +151,12 @@ export const getAppointments = async (req, res) => {
 export const handleNotifications = async (req, res) => {
   try {
     const { message, patientId } = req.body;
-
+    
     const patient = await Patient.findById(patientId);
 
     const index = patient.notifications.indexOf(message);
-
-    notifications.splice(index, 1);
+    
+    patient.notifications.splice(index, 1);
 
     await patient.save();
 
@@ -163,7 +165,16 @@ export const handleNotifications = async (req, res) => {
     res.status(409).json({ error: error.message });
   }
 };
-
+export const sendNotifications = async(req,res) =>{
+  try{
+    const {patientId} = req.params;
+    const patient = await Patient.findById(patientId);
+    res.status(200).json(patient.notifications);
+  }
+  catch(error){
+    res.status(409).json({ error: error.message });
+  }
+ };
 export const makeReview = async (req, res) => {
   try {
     const { rating, comment, patientId } = req.body;

@@ -230,3 +230,63 @@ export const handleBooking = async (req, res) => {
     res.status(407).json({ error: error.message });
   }
 };
+export const getRequestPatients = async (req, res) => {
+  try {
+    const { doctorId } = req.params;
+    const doctor = await Doctor.findById(doctorId);
+
+    const allrequest = await Promise.all(
+      doctor.requests.map(async (idd) => {
+        
+        const patient = await Patient.findById(idd);
+        
+        const { fullName, picturePath, location,age,sex  } = patient;
+        const newObj = {
+          fullName,
+          picturePath,
+          location,
+          age,
+          sex,
+        };
+
+        return newObj;
+      })
+    );
+
+    res.status(200).json(allrequest);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+export const getAppointmentsreq = async (req, res) => {
+  try {
+    const { doctorId } = req.params;
+    const doctor = await Doctor.findById(doctorId);
+    const appointmentsreq = await Promise.all(
+      doctor.appointmentRequests.map(async (appointmentObj) => {
+        const { date, time } = appointmentObj;
+        const patient = await Patient.findById(appointmentObj.patientId);
+       
+        const { fullName, picturePath, age, location, sex , _id} = patient;
+        const newObj = {
+          date,
+          time,
+          patient: {
+            _id,
+            fullName,
+            picturePath,
+            age,
+            location,
+            sex,
+          },
+        };
+
+        return newObj;
+      })
+    );
+
+    res.status(200).json(appointmentsreq);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};

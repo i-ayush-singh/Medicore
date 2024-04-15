@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import SelectForm from "../form/SelectForm";
 import { FaPlus } from "react-icons/fa";
 import { Button } from "antd";
-import InputAutoCompleteForm from "../form/autoCompleteForm";
-import SelectFormForMedicine from "../form/selectFormForMedicine";
+import InputAutoCompleteForm from "../form/AutoCompleteForm";
+import SelectFormForMedicine from "../form/SelectFormForMedicine";
 import { MedicalCheckupOptions,DosageOptions,FrequencyOptions,MedicalSymptomsOptions } from "../constants/global";
 const Treatment = () => {
     const {handleSubmit} = useForm();
