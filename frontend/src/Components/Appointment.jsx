@@ -27,13 +27,12 @@ async function BookAppointment(){
     const response = await axios.patch(`http://localhost:3001/patient/booking/${doctorId}`,
     {
       patientId : userId,
-           time : formDetails.time[0]+formDetails.time[1]+formDetails.time[3]+formDetails.time[4],
-           date : formDetails.date
+      time : formDetails.time[0]+formDetails.time[1]+formDetails.time[3]+formDetails.time[4],
+      date : formDetails.date
     },
     {
       headers : {
         'Authorization': "Bearer " +localStorage.getItem('token').slice(1,-1),
-        'Content-Type' : 'application/json',
     }
    })
    console.log(response.data);

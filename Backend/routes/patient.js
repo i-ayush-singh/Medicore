@@ -7,12 +7,13 @@ import {
   getReport,
   handleNotifications,
   getAppointments,
+  sendNotifications,
 } from "../controllers/patient.js";
 import { verifyToken } from "../middleware/auth.js";
 import express from "express";
 
 const router = express.Router();
-
+router.get("/sendnotifications/:patientId",verifyToken,sendNotifications);
 router.patch("/request/:doctorId", verifyToken, requestAppointment);
 router.patch("/booking/:doctorId", verifyToken, bookAppointment);
 router.patch("/review/:doctorId", verifyToken, makeReview);
