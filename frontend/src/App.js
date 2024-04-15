@@ -8,7 +8,7 @@ import { Dashboard } from "./Pages/Dasboard/Dashboard.jsx";
 import { Toaster } from "react-hot-toast";
 import { Doctors } from "./Pages/doctors.jsx";
 import { DashboardP } from "./Pages/Dasboard/DashboardP.jsx";
-
+import Treatment from "./components/Report.jsx";
 import { Notifications } from "./components/Notifications.jsx"
 import { PatientAPP } from "./Pages/PatientAPP.jsx"
 
@@ -30,6 +30,7 @@ function App() {
         element={<LoginP/>}
         >
         </Route>
+        <Route path="/report" element={<Treatment/>}></Route>
         <Route path="/doctor/:doctorId" element={<ProfilePage/>}></Route>
         <Route path="/dashboard"
         element={<Dashboard/>}

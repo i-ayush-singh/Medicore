@@ -27,7 +27,7 @@ async function BookAppointment(){
     const response = await axios.patch(`http://localhost:3001/patient/booking/${doctorId}`,
     {
       patientId : userId,
-           time : formDetails.time[0]+formDetails.time[1]+formDetails.time[3]+formDetails.time[4],
+           time : parseInt(formDetails.time[0]+formDetails.time[1]),
            date : formDetails.date
     },
     {
