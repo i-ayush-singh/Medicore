@@ -148,9 +148,9 @@ export default function SignupP(){
           /></div>
                   <div className="px-1 py-1">
           <select value= {formdetails.sex} onChange={handleSexChange} class="w-full px-2 py-1 border rounded border-slate-200">
-                <option value="option1">Male</option>
-                <option value="option2">Female</option>
-                <option value="option3">others</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">others</option>
                 
         </select></div>
         <div className="px-1 py-1">
