@@ -19,6 +19,7 @@ import { MyDoctors } from "./Pages/Mydoctors.jsx";
 import { ProfilePage } from "./Pages/Doctor/Doctor_Desciption.jsx";
 
 import { Navbar } from "./components/Navbar.jsx";
+import { Apprequest } from "./Pages/Apprequest.jsx";
 
 
 function App() {
@@ -61,6 +62,9 @@ function App() {
 
         <Route path="/MyDoctors"
         element={<MyDoctors/>}
+        ></Route>
+        <Route path="/apprequest"
+        element={<Apprequest/>}
         ></Route>
          
        
