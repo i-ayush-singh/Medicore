@@ -17,10 +17,10 @@ import { MyDoctors } from "./Pages/Mydoctors.jsx";
 
 
 import { ProfilePage } from "./Pages/Doctor/Doctor_Desciption.jsx";
-
+import { ProfilePages } from "./Pages/Patient_Profile.jsx";
 import { Navbar } from "./components/Navbar.jsx";
 import { Apprequest } from "./Pages/Apprequest.jsx";
-
+import { Requests } from "./Pages/Requestpage.jsx";
 
 function App() {
   return (
@@ -68,7 +68,13 @@ function App() {
         element={<Apprequest/>}
         ></Route>
          
-       
+         <Route path="/Prof"
+        element={<ProfilePages/>}
+        ></Route>
+        
+        <Route path="/Requests"
+        element={<Requests/>}
+        ></Route>
 
       </Routes>
     </Router>
