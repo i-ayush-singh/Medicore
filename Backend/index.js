@@ -2,13 +2,17 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import { registerDoctor, registerPatient } from "./controllers/auth.js";
+import { editDataP } from "./controllers/patient.js";
+import { editDataP } from "./controllers/patient.js";
+import { verifyToken } from "./middleware/auth.js";
 import multer from "multer";
 import mongoose from "mongoose";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import doctorRoutes from "./routes/doctor.js";
 import patientRoutes from "./routes/patient.js";
-import cors from "cors"
+import chatRoutes from "./routes/chat.js";
+import cors from "cors";
 
 //configuration
 
@@ -25,6 +29,7 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use("/auth", authRoutes);
 app.use("/doctor", doctorRoutes);
 app.use("/patient", patientRoutes);
+app.use("/chat", chatRoutes);
 
 // File Storage
 
@@ -42,6 +47,8 @@ const upload = multer({ storage });
 //requests with data
 app.post("/auth/patient/register", upload.single("picture"), registerPatient);
 app.post("/auth/doctor/register", upload.single("picture"), registerDoctor);
+app.patch("patient/edit", upload.single("picture"), verifyToken, editDataP);
+app.patch("doctor/edit", upload.single("picture"), verifyToken, editDataD);
 
 //mongoose setup
 mongoose

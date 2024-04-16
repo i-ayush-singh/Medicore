@@ -1,6 +1,7 @@
 import Doctor from "../models/doctor.js";
 import Patient from "../models/Patient.js";
 import Report from "../models/Report.js";
+import axios from "axios";
 
 export const getDoctors = async (req, res) => {
   try {
@@ -237,10 +238,9 @@ export const getRequestPatients = async (req, res) => {
 
     const allrequest = await Promise.all(
       doctor.requests.map(async (idd) => {
-        
         const patient = await Patient.findById(idd);
-        
-        const { fullName, picturePath, location,age,sex  } = patient;
+
+        const { fullName, picturePath, location, age, sex } = patient;
         const newObj = {
           fullName,
           picturePath,
@@ -266,8 +266,8 @@ export const getAppointmentsreq = async (req, res) => {
       doctor.appointmentRequests.map(async (appointmentObj) => {
         const { date, time } = appointmentObj;
         const patient = await Patient.findById(appointmentObj.patientId);
-       
-        const { fullName, picturePath, age, location, sex , _id} = patient;
+
+        const { fullName, picturePath, age, location, sex, _id } = patient;
         const newObj = {
           date,
           time,
@@ -288,5 +288,46 @@ export const getAppointmentsreq = async (req, res) => {
     res.status(200).json(appointmentsreq);
   } catch (error) {
     res.status(404).json({ message: error.message });
+  }
+};
+
+export const editDataD = async (req, res) => {
+  try {
+    const {
+      doctorId,
+      fullName,
+      picturePath,
+      fee,
+      timings,
+      specialist,
+      location,
+    } = req.body;
+
+    let doctor = await Doctor.findById(doctorId);
+
+    const locationObj = await axios.get(
+      "https://geocode.maps.co/search?q=" +
+        location +
+        "%20india" +
+        "&api_key=65eee4b0c9e2b147377658rsp5199d9"
+    );
+
+    const latitude = locationObj.data[0].lat,
+      longitude = locationObj.data[0].lon;
+
+    doctor.fullName = fullName;
+    doctor.picturePath = picturePath;
+    doctor.fee = fee;
+    doctor.timings = timings;
+    doctor.specialist = specialist;
+    doctor.location = location;
+    doctor.latitude = latitude;
+    doctor.longitude = longitude;
+
+    await doctor.save();
+
+    res.status(200).json(doctor);
+  } catch (error) {
+    res.status(407).json({ error: error.message });
   }
 };

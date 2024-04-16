@@ -1,6 +1,8 @@
 import { application } from "express";
+import axios from "axios";
 import Doctor from "../models/doctor.js";
 import Patient from "../models/Patient.js";
+import { errorMonitor } from "events";
 // Assuming your _id value is stored in a variable called idValue
 
 const processor = async (doctorId) => {
@@ -120,12 +122,11 @@ export const getAppointments = async (req, res) => {
   try {
     const { patientId } = req.params;
     const patient = await Patient.findById(patientId);
-
     const appointments = await Promise.all(
       patient.appointments.map(async (appointmentObj) => {
         const { date, time } = appointmentObj;
         const doctor = await Doctor.findById(appointmentObj.doctorId);
-       
+
         const { fullName, picturePath, files, specialist } = doctor;
         const newObj = {
           date,
@@ -151,11 +152,11 @@ export const getAppointments = async (req, res) => {
 export const handleNotifications = async (req, res) => {
   try {
     const { message, patientId } = req.body;
-    
+
     const patient = await Patient.findById(patientId);
 
     const index = patient.notifications.indexOf(message);
-    
+
     patient.notifications.splice(index, 1);
 
     await patient.save();
@@ -165,16 +166,15 @@ export const handleNotifications = async (req, res) => {
     res.status(409).json({ error: error.message });
   }
 };
-export const sendNotifications = async(req,res) =>{
-  try{
-    const {patientId} = req.params;
+export const sendNotifications = async (req, res) => {
+  try {
+    const { patientId } = req.params;
     const patient = await Patient.findById(patientId);
     res.status(200).json(patient.notifications);
-  }
-  catch(error){
+  } catch (error) {
     res.status(409).json({ error: error.message });
   }
- };
+};
 export const makeReview = async (req, res) => {
   try {
     const { rating, comment, patientId } = req.body;
@@ -211,5 +211,39 @@ export const makeReview = async (req, res) => {
     res.status(204).json(doctor);
   } catch (error) {
     res.status(409).json({ error: error.message });
+  }
+};
+
+export const editDataP = async (req, res) => {
+  try {
+    const { patientId, fullName, picturePath, age, sex, blood, location } =
+      req.body;
+
+    const patient = await Patient.findById(patientId);
+
+    const locationObj = await axios.get(
+      "https://geocode.maps.co/search?q=" +
+        location +
+        "%20india" +
+        "&api_key=65eee4b0c9e2b147377658rsp5199d9"
+    );
+
+    const latitude = locationObj.data[0].lat,
+      longitude = locationObj.data[0].lon;
+
+    patient.fullName = fullName;
+    patient.picturePath = picturePath;
+    patient.age = age;
+    patient.sex = sex;
+    patient.blood = blood;
+    patient.location = location;
+    patient.latitude = latitude;
+    patient.longitude = longitude;
+
+    await patient.save();
+
+    res.status(200).json(patient);
+  } catch (error) {
+    res.status(407).json({ error: error.message });
   }
 };
