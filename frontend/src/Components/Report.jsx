@@ -15,9 +15,10 @@ const Treatment = () => {
     const addField = (e) => {
         e.preventDefault();
         setMedicineList([...medicineList, { id: medicineList.length + 1 }])
+        console.log(medicineList)
     }
     return (
-        <div className="w-100 mb-3 rounded p-3 bg-gray-g">
+        <div className="w-100 mb-3 rounded p-3 bg-gray-100">
             <div className="text-center mb-2 d-flex justify-content-center">
                     <h5 className="border-success border-bottom w-25 pb-2 border-5">Report</h5>
                 </div>
@@ -26,7 +27,7 @@ const Treatment = () => {
                         <div className="card p-3 mb-3">
                           <h6 className="card-title text-secondary">Identify Disease & Symptoms</h6>
                            <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-12">
                                     <div className="form-group mb-3">
                                         <div>
                                             <label>Symptom</label>

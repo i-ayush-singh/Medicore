@@ -19,6 +19,7 @@ import ImageUploader from "./Pages/check.jsx";
 
 import { MyDoctors } from "./Pages/Mydoctors.jsx";
 
+
 import { ProfilePage } from "./Pages/Doctor/Doctor_Desciption.jsx";
 import { ProfilePages } from "./Pages/Patient_Profile.jsx";
 import { ProfileDoc } from "./Pages/Doctor_Profile.jsx";
@@ -32,21 +33,35 @@ const URL =
 console.log(URL);
 function App() {
   return (
-    <Router>
-      <Toaster />
+    <div>
+      <Toaster/>
       <Routes>
-        <Route path="/login" element={<LoginP />}></Route>
-
-        <Route path="/report" element={<Treatment />}></Route>
-        <Route path="/doctor/:doctorId" element={<ProfilePage />}></Route>
-        <Route path="/dashboard" element={<Dashboard />}></Route>
-        <Route path="/" element={<Landing />}></Route>
-        <Route path="/signup/patient" element={<SignupP />}></Route>
-        <Route path="/signup/doctor" element={<SignupD />}></Route>
-        <Route path="/home" element={<Navbar />}></Route>
-        <Route path="/NavD" element={<NavbarD />}></Route>
-        <Route path="/doctors" element={<Doctors />}></Route>
-        <Route path="/dashboardP" element={<DashboardP />}></Route>
+        <Route path="/login"
+        element={<LoginP/>}
+        >
+        </Route>
+        <Route path="/report" element={<Treatment/>}></Route>
+        <Route path="/doctor/:doctorId" element={<ProfilePage/>}></Route>
+        <Route path="/dashboard"
+        element={<Dashboard/>}
+        ></Route>
+        <Route path="/"
+        element = {<Landing/>}></Route>
+        <Route path="/signup/patient"
+        element={<SignupP/>}
+        ></Route>
+        <Route path="/signup/doctor"
+        element={<SignupD/>}
+        ></Route>
+        <Route path="/home"
+        element={<Navbar/>}
+        ></Route>
+        <Route path="/doctors"
+        element={<Doctors/>}
+        ></Route>
+        <Route path="/dashboardP"
+        element={<DashboardP/>}
+        ></Route>
 
         <Route path="/PatientAPP" element={<PatientAPP />}></Route>
         <Route path="/notificationsP" element={<Notifications />}></Route>
@@ -63,7 +78,8 @@ function App() {
         <Route path="/Profd" element={<ProfileDoc />}></Route>
         <Route path="/chat" element={<ChatTest />}></Route>
       </Routes>
-    </Router>
+    
+    </div>
   );
 }
 
