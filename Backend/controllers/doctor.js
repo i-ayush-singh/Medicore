@@ -240,7 +240,7 @@ export const getRequestPatients = async (req, res) => {
       doctor.requests.map(async (idd) => {
         const patient = await Patient.findById(idd);
 
-        const { fullName, picturePath, location, age, sex ,_id} = patient;
+        const { fullName, picturePath, location, age, sex, _id } = patient;
         const newObj = {
           _id,
           fullName,
@@ -330,5 +330,29 @@ export const editDataD = async (req, res) => {
     res.status(200).json(doctor);
   } catch (error) {
     res.status(407).json({ error: error.message });
+  }
+};
+
+export const getDoctorReviews = async (req, res) => {
+  try {
+    const { doctorId } = req.params;
+    const doctor = await Doctor.findById(doctorId);
+
+    const patientReviews = await Promise.all(
+      doctor.reviews.forEach(async (key, value) => {
+        const patient = await Patient.findById(key);
+        const newObj = {
+          fullName: patient.fullName,
+          picturePath: patient.picturePath,
+          myReview: value,
+        };
+
+        return newObj;
+      })
+    );
+
+    res.status(200).json(patientReviews);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 };

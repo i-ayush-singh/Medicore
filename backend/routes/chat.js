@@ -1,7 +1,8 @@
 import express from "express";
-import {} from "../controllers/chat.js";
+import { createChat } from "../controllers/chat.js";
 import { verifyToken } from "../middleware/auth.js";
 
 const router = express.Router();
 
+router.post("/create", createChat);
 export default router;
