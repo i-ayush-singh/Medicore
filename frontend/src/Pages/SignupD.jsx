@@ -31,8 +31,7 @@ export default function SignupD(){
     const formSubmit = async (e) => {
         try{
             if (loading) return;
-            const { fullName, email, password, location,fee,specialist} =
-        formdetails;
+            const { fullName, email, password, location,fee,specialist} = formdetails;
         if (!fullName || !location || !email || !password || !fee || !specialist ) {
             return toast.error("Input field should not be empty");
           }
