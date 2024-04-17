@@ -18,8 +18,8 @@ import { About } from "./Pages/AboutUs.jsx";
 import ImageUploader from "./Pages/check.jsx";
 
 import { MyDoctors } from "./Pages/Mydoctors.jsx";
-
-
+import LobbyScreen from "./screens/Lobby";
+import RoomPage from "./screens/Room";
 import { ProfilePage } from "./Pages/Doctor/Doctor_Desciption.jsx";
 import { ProfilePages } from "./Pages/Patient_Profile.jsx";
 import { ProfileDoc } from "./Pages/Doctor_Profile.jsx";
@@ -33,6 +33,7 @@ const URL =
 console.log(URL);
 function App() {
   return (
+    // <Router>
     <div>
       <Toaster/>
       <Routes>
@@ -40,6 +41,8 @@ function App() {
         element={<LoginP/>}
         >
         </Route>
+        <Route path="/video" element={<LobbyScreen />}/>
+        <Route path="/room/:roomId" element={<RoomPage />}/>
         <Route path="/report" element={<Treatment/>}></Route>
         <Route path="/doctor/:doctorId" element={<ProfilePage/>}></Route>
         <Route path="/dashboard"
