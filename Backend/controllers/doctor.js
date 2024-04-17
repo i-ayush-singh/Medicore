@@ -118,6 +118,12 @@ export const handleRequest = async (req, res) => {
     if (result === "true") {
       doctor.patientList.push(patientId);
       patient.doctorList.push(doctorId);
+      const doctorInformation = [
+        `name: ${doctor.fullName}`,
+        `email: ${doctor.email}`,
+        `specialist: ${doctor.specialist}`,
+        `location: ${doctor.location}`,
+      ]
       const basicInformation = [
         `Name: ${patient.fullName}`,
         `Email: ${patient.email}`,
@@ -128,6 +134,7 @@ export const handleRequest = async (req, res) => {
 
       const newReport = new Report({
         basicInformation,
+        doctorInformation,
         patientId,
         doctorId,
       });
@@ -175,8 +182,6 @@ export const createReport = async (req, res) => {
       patientId,
       doctorId,
       medicine,
-      dosage,
-      frequency,
       symptoms,
       tests,
     } = req.body;
@@ -186,8 +191,6 @@ export const createReport = async (req, res) => {
     const report = await Report.findById(doctor.files.get(patientId));
 
     report.medicine = medicine;
-    report.dosage = dosage;
-    report.frequency = frequency;
     report.symptoms = symptoms;
     report.tests = tests;
 
