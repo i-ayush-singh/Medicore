@@ -8,6 +8,7 @@ import {
   handleNotifications,
   getAppointments,
   sendNotifications,
+  editDataP,
 } from "../controllers/patient.js";
 import { verifyToken } from "../middleware/auth.js";
 import express from "express";

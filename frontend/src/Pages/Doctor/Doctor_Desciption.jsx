@@ -2,7 +2,8 @@ import axios from "axios";
 import React, { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Wrapper } from "../../components/wrapper";
- 
+ import { Navbar } from "../../components/Navbar";
+ import { SidebarP } from "../../components/SidebarP";
 import { Appointment } from "../../components/Appointment";
 export function ProfilePage(){
     const { doctorId } = useParams();
@@ -87,9 +88,14 @@ export function ProfilePage(){
         };
         
     return (
-        
+        <div>
+        <Navbar/>
+        <div className = "grid grid-cols-4 gap-0">
+        <div className="col-span-1">
+              <SidebarP/>              
+      </div>
        
-        <div className="flex justify-center">
+        <div className="flex justify-center col-span-3">
             
             <Wrapper >
             <div className="grid grid-rows-8 grid-cols-10 grid-flow-row gap-8 flex-wrap">
@@ -125,6 +131,7 @@ export function ProfilePage(){
             </Wrapper>
             
         </div>
-        
+        </div>
+        </div>
     );
 }

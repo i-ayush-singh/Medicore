@@ -216,9 +216,10 @@ export const makeReview = async (req, res) => {
 
 export const editDataP = async (req, res) => {
   try {
+    console.log('hi');
     const { patientId, fullName, picturePath, age, sex, blood, location } =
       req.body;
-
+    console.log(patientId);
     const patient = await Patient.findById(patientId);
 
     const locationObj = await axios.get(
