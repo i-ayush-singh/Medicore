@@ -32,6 +32,7 @@ import { Navbar } from "./components/Navbar.jsx";
 import { NavbarD } from "./components/NavbarD.jsx";
 import { Apprequest } from "./Pages/Apprequest.jsx";
 import { Requests } from "./Pages/Requestpage.jsx";
+import { AnalogClock }from "./Pages/clockpage.jsx"
 const URL =
   process.env.NODE_ENV === "production" ? undefined : "http://localhost:4000";
 
@@ -104,6 +105,7 @@ function App() {
         <Route path="/Profd" element={<ProfileDoc />}></Route>
         <Route path="/chat" element={<ChatTest />}></Route>
         <Route path="/common" element={<Card />}></Route>
+        <Route path="/clk" element={<AnalogClock/>}></Route>
       </Routes>
     
     </div>
