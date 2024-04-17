@@ -12,8 +12,9 @@ import Treatment from "./components/Report.jsx";
 import { Notifications } from "./components/Notifications.jsx";
 import { PatientAPP } from "./Pages/PatientAPP.jsx";
 import { ChatTest } from "./Pages/ChatTest.jsx";
-
+import { Viewreport } from "./components/viewreport.jsx";
 import { About } from "./Pages/AboutUs.jsx";
+import { Card } from "./components/commoncomp.jsx"
 
 
 import { Docappointments } from "./Pages/Docappointments.jsx";
@@ -99,9 +100,10 @@ function App() {
         
 
         <Route path="/About" element={<About />}></Route>
-
+        <Route path="/viewreport" element={<Viewreport />}></Route>
         <Route path="/Profd" element={<ProfileDoc />}></Route>
         <Route path="/chat" element={<ChatTest />}></Route>
+        <Route path="/common" element={<Card />}></Route>
       </Routes>
     
     </div>
