@@ -11,7 +11,11 @@ import { DashboardP } from "./Pages/Dasboard/DashboardP.jsx";
 import Treatment from "./components/Report.jsx";
 import { Notifications } from "./components/Notifications.jsx"
 import { PatientAPP } from "./Pages/PatientAPP.jsx"
+
 import { About } from "./Pages/AboutUs.jsx"
+
+import ImageUploader from "./Pages/check.jsx";
+
 
 import { MyDoctors } from "./Pages/Mydoctors.jsx";
 
@@ -57,7 +61,7 @@ function App() {
         <Route path="/PatientAPP"
         element={<PatientAPP/>}
         ></Route>
-        <Route path="/notifications"
+        <Route path="/notificationsP"
         element={<Notifications/>}
         ></Route>
 
@@ -84,6 +88,8 @@ function App() {
         element={<ProfileDoc/>}
         ></Route>
 
+
+        
       </Routes>
     </Router>
   );

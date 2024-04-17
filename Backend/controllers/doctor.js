@@ -240,8 +240,9 @@ export const getRequestPatients = async (req, res) => {
       doctor.requests.map(async (idd) => {
         const patient = await Patient.findById(idd);
 
-        const { fullName, picturePath, location, age, sex } = patient;
+        const { fullName, picturePath, location, age, sex ,_id} = patient;
         const newObj = {
+          _id,
           fullName,
           picturePath,
           location,
