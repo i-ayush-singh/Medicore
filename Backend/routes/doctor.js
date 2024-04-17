@@ -10,10 +10,11 @@ import {
   getRequestPatients,
   getAppointmentsreq,
   getDoctorReviews,
+  getdocAppointments,
 } from "../controllers/doctor.js";
 import { verifyToken } from "../middleware/auth.js";
 const router = express.Router();
-
+router.get("/getdocAppointments/:doctorId", verifyToken, getdocAppointments);
 router.get("/getAppointmentsreq/:doctorId", verifyToken, getAppointmentsreq);
 router.get("/getallrequests/:doctorId", verifyToken, getRequestPatients);
 router.get("/fetchAll", verifyToken, getDoctors);

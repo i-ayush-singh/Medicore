@@ -15,6 +15,10 @@ import { ChatTest } from "./Pages/ChatTest.jsx";
 
 import { About } from "./Pages/AboutUs.jsx";
 
+
+import { Docappointments } from "./Pages/Docappointments.jsx";
+
+
 import ImageUploader from "./Pages/check.jsx";
 
 import { MyDoctors } from "./Pages/Mydoctors.jsx";
@@ -69,12 +73,30 @@ function App() {
         <Route path="/PatientAPP" element={<PatientAPP />}></Route>
         <Route path="/notificationsP" element={<Notifications />}></Route>
 
-        <Route path="/MyDoctors" element={<MyDoctors />}></Route>
-        <Route path="/apprequest" element={<Apprequest />}></Route>
 
-        <Route path="/Prof" element={<ProfilePages />}></Route>
+       
 
-        <Route path="/Requests" element={<Requests />}></Route>
+        <Route path="/MyDoctors"
+        element={<MyDoctors/>}
+        ></Route>
+        <Route path="/apprequest"
+        element={<Apprequest/>}
+        ></Route>
+         
+         <Route path="/Prof"
+        element={<ProfilePages/>}
+        ></Route>
+        
+        <Route path="/Requests"
+        element={<Requests/>}
+        ></Route>
+       <Route path="/docappointments"
+        element = {<Docappointments/>}
+        ></Route>
+
+        
+
+        
 
         <Route path="/About" element={<About />}></Route>
 
