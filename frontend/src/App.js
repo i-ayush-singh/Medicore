@@ -11,13 +11,13 @@ import { DashboardP } from "./Pages/Dasboard/DashboardP.jsx";
 import Treatment from "./components/Report.jsx";
 import { Notifications } from "./components/Notifications.jsx"
 import { PatientAPP } from "./Pages/PatientAPP.jsx"
-
+import { About } from "./Pages/AboutUs.jsx"
 
 import { MyDoctors } from "./Pages/Mydoctors.jsx";
 
-
 import { ProfilePage } from "./Pages/Doctor/Doctor_Desciption.jsx";
 import { ProfilePages } from "./Pages/Patient_Profile.jsx";
+import { ProfileDoc } from "./Pages/Doctor_Profile.jsx";
 import { Navbar } from "./components/Navbar.jsx";
 import { Apprequest } from "./Pages/Apprequest.jsx";
 import { Requests } from "./Pages/Requestpage.jsx";
@@ -74,6 +74,14 @@ function App() {
         
         <Route path="/Requests"
         element={<Requests/>}
+        ></Route>
+
+<Route path="/About"
+        element={<About/>}
+        ></Route>
+
+<Route path="/Profd"
+        element={<ProfileDoc/>}
         ></Route>
 
       </Routes>
