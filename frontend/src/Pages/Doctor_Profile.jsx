@@ -23,6 +23,14 @@ export function ProfileDoc(){
                     <input class="p-2 rounded-xl border w-full" type="number" name="ageyed" id="age" placeholder="Fee"/>
                     </div>
                     <div>
+                    <label for="stime" class="block mb-2 text-sm font-medium text-gray-900">Start Time</label>
+                    <input class="p-2 rounded-xl border w-full" type="time" name="stm" id="stime" placeholder="Start Time"/>
+                    </div>
+                    <div>
+                    <label for="etime" class="block mb-2 text-sm font-medium text-gray-900">End Time</label>
+                    <input class="p-2 rounded-xl border w-full" type="time" name="etm" id="etime" placeholder="End time"/>
+                    </div>
+                    <div>
                     <label for="location" class="block mb-2 text-sm font-medium text-gray-900">Location</label>
                     <input class="p-2 rounded-xl border w-full" type="text" name="Loc" id="location" placeholder="Location"/>
                     </div>

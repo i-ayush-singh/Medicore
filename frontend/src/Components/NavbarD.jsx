@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-export function NavbarD(){
+export function NavbarD({name}){
     return(
         
 
@@ -10,7 +10,7 @@ export function NavbarD(){
       <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Medicore Logo" />
       <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">Medex</span>
   </div>
- 
+      <div>{name}</div>
     <div class="pt-6">
       <button class="flex gap-2 pt-2 pb-2 px-5 hover:text-blue-700 focus:text-blue-700">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

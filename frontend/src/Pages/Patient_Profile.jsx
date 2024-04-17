@@ -1,6 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { Navbar } from '../components/Navbar';
+import { SidebarP } from '../components/SidebarP';
 export function ProfilePages(){
+    
     
     const patient = JSON.parse(localStorage.getItem('user'));
     const [formdetails, setFormdetails] = useState({
@@ -10,6 +15,7 @@ export function ProfilePages(){
         blood : patient.blood,
         age : patient.age,
     })
+    const [currentFile, setCurrentFile] = useState(patient.picturePath);
     const [selectedImage, setSelectedImage] = useState(`http://localhost:3001/assets/${patient.picturePath}`);
     const inputChange=(e)=>{
         const { name, value } = e.target;
@@ -19,7 +25,8 @@ export function ProfilePages(){
         });
     };
     const handleImageChange = (event) => {
-        const file = event.target.files[0];
+        setCurrentFile(event.target.files[0]);
+        const file = event.target.files[0]
         if (file) {
           const reader = new FileReader();
           reader.onload = () => {
@@ -28,15 +35,57 @@ export function ProfilePages(){
           reader.readAsDataURL(file);
         }
       };
-    return (
+      const formSubmit = async (e) => {
+        try{
+            const { fullName,location, blood, sex, age} =
+        formdetails;
+        console.log(fullName);
+          const FD = new FormData();
+          FD.append('picture',currentFile);
+          FD.append('fullName',fullName);
+          FD.append('location',location);
+          FD.append('sex',sex);
+          FD.append('blood',blood);
+          FD.append('age',age);
+          FD.append('picturePath',currentFile.name);
+          FD.append('patientId',patient._id)
+          console.log(FD.get('picture'));
+          const { data } = await toast.promise(
+            axios.patch("http://localhost:3001/edit/patient", FD,{
+                headers: {
+                    'Authorization': "Bearer " + localStorage.getItem('token').slice(1, -1),
+                    'Content-Type': 'multipart/form-data', // Corrected content type
+                },
+            }),
+            {
+              pending: "updating user...",
+              success: "User updated successfully",
+              error: "Unable to update user",
+              loading: "updating user...",
+            }
+          );
+          localStorage.setItem('user',JSON.stringify(data));
+
+        }catch(error){
+            console.log(error);
+        }
         
-       
-        <section class="bg-slate-800 min-h-screen flex box-border justify-center items-center p-10">
+
+    }
+    return (
+        <div>
+        <Navbar/>
+        <div className = "grid grid-cols-4 gap-0">
+        <div className="col-span-1">
+              <SidebarP/>              
+      </div>
+        
+        <section class=" col-span-3 bg-slate-800 min-h-screen flex box-border justify-center items-center p-10">
         <div class="bg-white rounded-2xl flex max-w-3xl p-4 items-center">
             <div class="md:w-1/2 px-8">
                 <h2 class="font-bold text-3xl text-[#002D74] p-4">Patient Profile</h2>
     
-                <form action="" class="flex flex-col gap-4">
+                <div onSubmit={formSubmit}  class="flex flex-col gap-4">
                     <div>
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Full Name</label>
                     <input class="p-2 rounded-xl border w-full" type="text" id = "name" name="fullName" placeholder="FullName" value = {formdetails.fullName} onChange = {inputChange}/>
@@ -86,8 +135,8 @@ export function ProfilePages(){
         accept="image/*"
         onChange={handleImageChange}
       />
-                    <button class="bg-[#002D74] text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium p-8" type="submit">Save Changes</button>
-                </form>
+                    <button onClick={formSubmit} class="bg-[#002D74] text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium p-8" >Save Changes</button>
+                </div>
                 
                 
                 
@@ -97,6 +146,8 @@ export function ProfilePages(){
             </div>
         </div>
     </section>
+    </div>
+    </div>
     )
 }
 

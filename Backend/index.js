@@ -27,16 +27,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config();
 
+
+
 //middleware
 app.use(express.json());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
-app.use("/auth", authRoutes);
-app.use("/doctor", doctorRoutes);
-app.use("/patient", patientRoutes);
-app.use("/chat", chatRoutes);
-
-// File Storage
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "public/assets");
@@ -45,13 +40,20 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-
 const upload = multer({ storage });
+app.use("/auth", authRoutes);
+app.use("/doctor", doctorRoutes);
+app.patch("/edit/patient", upload.single("picture"), verifyToken, editDataP);
+app.use("/patient", patientRoutes);
+app.use("/chat", chatRoutes);
+
+// File Storage
+
 
 //requests with data
 app.post("/auth/patient/register", upload.single("picture"), registerPatient);
 app.post("/auth/doctor/register", upload.single("picture"), registerDoctor);
-app.patch("patient/edit", upload.single("picture"), verifyToken, editDataP);
+
 app.patch("doctor/edit", upload.single("picture"), verifyToken, editDataD);
 
 //mongoose setup
