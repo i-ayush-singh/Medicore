@@ -12,7 +12,7 @@ export function ProfilePages(){
                 <form action="" class="flex flex-col gap-4">
                     <div>
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
-                    <input class="p-2 rounded-xl border w-full" type="text" name="name" placeholder="FullName"/>
+                    <input class="p-2 rounded-xl border w-full" type="text" name="name" id="name" placeholder="FullName"/>
                     </div>
                     <div>
                     <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age</label>
@@ -20,7 +20,7 @@ export function ProfilePages(){
                     </div>
                     <div>
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sex</label>
-                    <select class="w-full px-2 py-1 border rounded border-slate-200">
+                    <select class="w-full px-2 py-1 border rounded border-slate-200" id="email">
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Others">others</option>
@@ -28,8 +28,8 @@ export function ProfilePages(){
         </select>
                     </div>  
                     <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Blood Group</label>
-                    <select class="w-full px-2 py-1 border rounded border-slate-200">
+                    <label for="blood" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Blood Group</label>
+                    <select class="w-full px-2 py-1 border rounded border-slate-200" id="blood">
                 <option value="A+">A+</option>
                 <option value="B+">B+</option>
                 <option value="O+">O+</option>
@@ -42,8 +42,8 @@ export function ProfilePages(){
         </select>
                     </div>
                     <div>
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
-                    <input class="p-2 rounded-xl border w-full" type="text" name="Location" placeholder="Location"/>
+                    <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+                    <input class="p-2 rounded-xl border w-full" type="text" name="Location" id="location" placeholder="Location"/>
                     </div>
                     <button class="bg-[#002D74] text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium p-8" type="submit">Save Changes</button>
                 </form>

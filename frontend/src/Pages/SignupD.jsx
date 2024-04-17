@@ -70,9 +70,9 @@ export default function SignupD(){
     
 
   return(
-    <section className="bg-slate-300 h-full flex justify-center register-section w-full ">
+    <section className="bg-slate-300 h-full flex justify-center register-section w-full">
       
-       <div onSubmit={formSubmit} className="register-form flex flex-col  justify-center rounded-lg bg-white w-100 text-center py-2 px-4 h-81 mt-20 mb-20">
+       <div onSubmit={formSubmit} className="register-form flex flex-col  justify-center rounded-lg bg-white w-96 text-center py-4 px-4 h-81 mt-20 mb-20">
         <div class="font-bold text-4xl pt-2 pb-5">Sign Up Doctor</div>
         <div className="px-1 py-1">
             <input
