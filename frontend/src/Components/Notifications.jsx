@@ -2,6 +2,9 @@ import { Card, Typography } from "@material-tailwind/react";
 import React from "react";
  import { useState ,useEffect } from "react";
  import axios from "axios"
+
+ import { Navbar } from "../components/Navbar";
+import { SidebarP } from "../components/SidebarP";
 export function Notifications() {
   const [notification,setNotification] = useState([]);
   const TABLE_HEAD = ["Notifications", "", ""];
@@ -47,7 +50,13 @@ useEffect(() => {
   
   }
   return (
-    <Card className="h-full w-full overflow-scroll p-14">
+    <div>
+        <Navbar/>
+        <div className = "grid grid-cols-4 gap-0">
+        <div className="col-span-1">
+              <SidebarP/>              
+      </div>
+    <Card className="h-full w-full overflow-scroll p-14 col-span-3">
       <table className="w-full min-w-max table-auto text-left justify-center p-10">
         <thead>
           <tr>
@@ -115,5 +124,7 @@ useEffect(() => {
         </tbody>
       </table>
     </Card>
+    </div>
+    </div>
   );
 }

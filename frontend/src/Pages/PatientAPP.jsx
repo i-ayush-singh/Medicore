@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Card, Typography } from "@material-tailwind/react";
 import axios from "axios";
-
+import { Navbar } from "../components/Navbar";
+import { SidebarP } from "../components/SidebarP";
  
 export function PatientAPP() {
     const TABLE_HEAD = ["Doctor Name", "Speacialist", "Date", "Time", "Status", "Report"];
@@ -31,6 +32,12 @@ export function PatientAPP() {
 
   return (
     <div>
+        <Navbar/>
+        <div className = "grid grid-cols-4 gap-0">
+        <div className="col-span-1">
+              <SidebarP/>              
+      </div>
+    <div className = "col-span-3">
     <Card className="h-full w-full overflow-scroll p-10 justify-center">
       <table className="w-full min-w-max table-auto text-left justify-center">
         <thead>
@@ -91,6 +98,8 @@ export function PatientAPP() {
         </tbody>
       </table>
     </Card>
+    </div>
+    </div>
     </div>
   );
 }
