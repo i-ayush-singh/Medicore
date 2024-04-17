@@ -1,21 +1,72 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SelectForm from "../form/SelectForm";
+import { useParams } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { Button } from "antd";
 import InputAutoCompleteForm from "../form/autoCompleteForm";
 import SelectFormForMedicine from "../form/selectFormForMedicine";
+import InputAutoCompleteForm from "../form/AutoCompleteForm";
+import toast from "react-hot-toast";
+import SelectFormForMedicine from "../form/SelectFormForMedicine";
+import axios from "axios";
 import { MedicalCheckupOptions,DosageOptions,FrequencyOptions,MedicalSymptomsOptions } from "../constants/global";
 const Treatment = () => {
-    const {handleSubmit} = useForm();
+   
+    const { doctorId,patientId } = useParams();
+    const [loading, setloading] = useState(false);
     const [symptom,setSymptom] = useState([]);
     const [tests,setTests] = useState([]);
     const [medicineList,setMedicineList] = useState([{ id: 1 }]);
-
+    const [formdetails,setFormdetails] = useState({
+       
+       medicine:[],
+       symptom:[],
+       tests:[]
+    })
+    const inputChange = (e) => {
+    const {name,value} = e.target;
+    return setFormdetails({
+        ...formdetails,
+        [name]:value,
+    });
+   };
+   
     const addField = (e) => {
         e.preventDefault();
         setMedicineList([...medicineList, { id: medicineList.length + 1 }])
         console.log(medicineList)
+    }
+    const handleSubmit = async (e) =>{
+       try{
+         if(loading) return;
+          const {medicine,symptom,tests} = formdetails;
+          if(!medicine || !symptom || !tests) {
+            return toast.error("Input field should not be empty");
+          }
+            const formData = new FormData();
+            // formData.append('doctorId',doctorId);
+            // formData.append('patientId',patientId);
+            formData.append('medicine',medicine);
+            formData.append('symptom',symptom);
+            formData.append('tests',tests);
+            console.log(formData);
+            await toast.promise(
+               axios.post("http://localhost3001/doctor/createReport",formData,{
+                headers :{
+                'Content-Type': 'form-data',
+                 },
+               }),
+               {
+                pending: "Creating report...",
+                success: "Report created successfully",
+                error: "Unable to create report",
+                loading: "Creating report...",
+               }
+            );
+       }catch(err){
+        console.log(err);
+       }
     }
     return (
         <div className="w-100 mb-3 rounded p-3 bg-gray-100">

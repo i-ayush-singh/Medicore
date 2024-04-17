@@ -53,10 +53,19 @@ const DoctorSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    timings: {
-      type: Array,
-      required: true,
-      default: [],
+    startTime: {
+      type: Object,
+      default: {
+        hours: 0,
+        minutes: 0,
+      },
+    },
+    stopTime: {
+      type: Object,
+      default: {
+        hours: 23,
+        minutes: 59,
+      },
     },
     specialist: {
       type: String,

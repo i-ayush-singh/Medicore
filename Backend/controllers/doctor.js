@@ -118,6 +118,12 @@ export const handleRequest = async (req, res) => {
     if (result === "true") {
       doctor.patientList.push(patientId);
       patient.doctorList.push(doctorId);
+      const doctorInformation = [
+        `name: ${doctor.fullName}`,
+        `email: ${doctor.email}`,
+        `specialist: ${doctor.specialist}`,
+        `location: ${doctor.location}`,
+      ]
       const basicInformation = [
         `Name: ${patient.fullName}`,
         `Email: ${patient.email}`,
@@ -128,6 +134,7 @@ export const handleRequest = async (req, res) => {
 
       const newReport = new Report({
         basicInformation,
+        doctorInformation,
         patientId,
         doctorId,
       });
@@ -175,8 +182,6 @@ export const createReport = async (req, res) => {
       patientId,
       doctorId,
       medicine,
-      dosage,
-      frequency,
       symptoms,
       tests,
     } = req.body;
@@ -186,8 +191,6 @@ export const createReport = async (req, res) => {
     const report = await Report.findById(doctor.files.get(patientId));
 
     report.medicine = medicine;
-    report.dosage = dosage;
-    report.frequency = frequency;
     report.symptoms = symptoms;
     report.tests = tests;
 
@@ -332,7 +335,6 @@ export const editDataD = async (req, res) => {
     res.status(407).json({ error: error.message });
   }
 };
-
 export const getDoctorReviews = async (req, res) => {
   try {
     const { doctorId } = req.params;
@@ -356,3 +358,34 @@ export const getDoctorReviews = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+export const getdocAppointments = async (req, res) => {
+  try {
+    const { doctorId } = req.params;
+    const doctor = await Doctor.findById(doctorId);
+    const appointments = await Promise.all(
+      doctor.appointments.map(async (appointmentObj) => {
+        const { date, time } = appointmentObj;
+        const patient = await Patient.findById(appointmentObj.patientId);
+
+        const { fullName, picturePath, files, _id, location} = patient;
+        const newObj = {
+          date,
+          time,
+          doctor: {
+            fullName,
+            picturePath,
+            files,
+            _id,
+            location,
+          },
+        };
+
+        return newObj;
+      })
+    );
+    res.status(200).json(appointments);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
