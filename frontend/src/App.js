@@ -23,6 +23,7 @@ import { ProfilePage } from "./Pages/Doctor/Doctor_Desciption.jsx";
 import { ProfilePages } from "./Pages/Patient_Profile.jsx";
 import { ProfileDoc } from "./Pages/Doctor_Profile.jsx";
 import { Navbar } from "./components/Navbar.jsx";
+import { NavbarD } from "./components/NavbarD.jsx";
 import { Apprequest } from "./Pages/Apprequest.jsx";
 import { Requests } from "./Pages/Requestpage.jsx";
 
@@ -35,6 +36,7 @@ function App() {
         element={<LoginP/>}
         >
         </Route>
+        
         <Route path="/report" element={<Treatment/>}></Route>
         <Route path="/doctor/:doctorId" element={<ProfilePage/>}></Route>
         <Route path="/dashboard"
@@ -50,6 +52,9 @@ function App() {
         ></Route>
         <Route path="/home"
         element={<Navbar/>}
+        ></Route>
+        <Route path="/NavD"
+        element={<NavbarD/>}
         ></Route>
         <Route path="/doctors"
         element={<Doctors/>}
