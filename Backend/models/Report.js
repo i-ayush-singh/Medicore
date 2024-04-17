@@ -5,6 +5,10 @@ const ReportSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    doctorInformation: {
+      type: Array,
+      required: true,
+    },
     patientId: {
       type: String,
       required: true,
@@ -16,14 +20,6 @@ const ReportSchema = new mongoose.Schema(
     medicine: {
       type: Array,
       default: [],
-    },
-    dosage: {
-      type: String,
-      default: "",
-    },
-    frequency: {
-      type: String,
-      default: "",
     },
     symptoms: {
       type: Array,
