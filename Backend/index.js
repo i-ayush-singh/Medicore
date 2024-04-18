@@ -14,10 +14,13 @@ import patientRoutes from "./routes/patient.js";
 import chatRoutes from "./routes/chat.js";
 import cors from "cors";
 import { socketSetup } from "./controllers/socket.js";
+import { Server } from "socket.io";
+import { createServer } from "http";
 //configuration
 
 const app = express();
 app.use(cors());
+export const server = createServer(app);
 const PORT = process.env.PORT || 3001;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,7 +29,6 @@ dotenv.config();
 //middleware
 app.use(express.json());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
-
 
 //server setup for socket
 socketSetup();
@@ -58,14 +60,12 @@ app.use("/chat", chatRoutes);
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {
-    app.listen(PORT, () => console.log(`Server Port : ${PORT}`));
+    server.listen(PORT, () => console.log(`Server Port : ${PORT}`));
   })
   .catch((error) => console.log(`${error} did not connected`));
 
-
 //Sockets-Video Call
 //const { Server } = require("socket.io");
-import { Server } from "socket.io";
 const io = new Server(8000, {
   cors: true,
 });
