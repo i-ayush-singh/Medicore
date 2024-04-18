@@ -1,8 +1,10 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export function Card(){
+    const navigate = useNavigate();
     const { doctorId, patientId} = useParams();
     const [doctor, setDoctor] = useState({});
     const [patient, setPatient] = useState({});
@@ -84,10 +86,13 @@ export function Card(){
 </div>
 </div>
 <div class="pl-80 p-10 h-2">
-<button class="w-80 h-10 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Generate Report</button>
+<button class="w-80 h-10 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick = {()=>{
+    navigate(`/report/${doctorId}/${patientId}`);
+}}>Generate Report</button>
 </div>
 <div class="pl-80 p-10 h-5">
-<button class="w-80 h-10 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">View Report</button>
+<button class="w-80 h-10 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick = {()=>{navigate(`/viewreport/${doctorId}/${patientId}`);
+}}>View Report</button>
 </div>
 <div class="pl-80 p-10 h-5">
 <button class="w-80 h-10 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Start Video Conference</button>

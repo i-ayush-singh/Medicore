@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 const ReportSchema = new mongoose.Schema(
   {
     basicInformation: {
-      type: Array,
+      type: Object,
       required: true,
     },
     doctorInformation: {
-      type: Array,
+      type: Object,
       required: true,
     },
     patientId: {

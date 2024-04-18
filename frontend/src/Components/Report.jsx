@@ -8,50 +8,73 @@ import InputAutoCompleteForm from "../form/AutoCompleteForm";
 import SelectFormForMedicine from "../form/SelectFormForMedicine";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useEffect } from "react";
 import { MedicalCheckupOptions,DosageOptions,FrequencyOptions,MedicalSymptomsOptions } from "../constants/global";
-const Treatment = () => {
+ const Treatment = () => {
     const { doctorId,patientId } = useParams();
-    const [loading, setloading] = useState(false);
     const [symptom,setSymptom] = useState([]);
     const [tests,setTests] = useState([]);
+    const [doctor,setDoctor] = useState({});
+    const [patient,setPatient] = useState({});
     const [medicineList,setMedicineList] = useState([{ id: 1 }]);
-    const [formdetails,setFormdetails] = useState({
+    const fetchdoctor = async () => {
+        try{
+            let res = await axios.get(`http://localhost:3001/doctor/getdoctor/${doctorId}`, {
+                headers: {
+                    'Authorization': "Bearer " + localStorage.getItem('token').slice(1,-1),
+                },
+            });
+            setDoctor(res.data);
+        } catch(error){
+            console.log(error);
+        }
+  
        
-       medicine:[],
-       symptom:[],
-       tests:[]
-    })
-    const inputChange = (e) => {
-    const {name,value} = e.target;
-    return setFormdetails({
-        ...formdetails,
-        [name]:value,
-    });
-   };
+      };
+      const fetchpatient = async () => {
+        try{
+            let res = await axios.get(`http://localhost:3001/patient/getpatient/${patientId}`, {
+                headers: {
+                    'Authorization': "Bearer " + localStorage.getItem('token').slice(1,-1),
+                },
+            });
+            setPatient(res.data);
+        } catch(error){
+            console.log(error);
+        }
+       
+      };
+    useEffect(() => {
+        fetchpatient();
+        fetchdoctor();
+      }, []);
    
     const addField = (e) => {
         e.preventDefault();
         setMedicineList([...medicineList, { id: medicineList.length + 1 }])
-        console.log(medicineList)
     }
     const handleSubmit = async (e) =>{
        try{
-         if(loading) return;
-          const {medicine,symptom,tests} = formdetails;
-          if(!medicine || !symptom || !tests) {
-            return toast.error("Input field should not be empty");
-          }
             const formData = new FormData();
             // formData.append('doctorId',doctorId);
             // formData.append('patientId',patientId);
-            formData.append('medicine',medicine);
-            formData.append('symptom',symptom);
+            formData.append("patientId",patientId);
+            formData.append("doctorId" ,doctorId);
+            formData.append('medicine',medicineList);
+            formData.append('symptoms',symptom);
             formData.append('tests',tests);
-            console.log(formData);
+            
+            console.log(formData.get('symptoms'));
             await toast.promise(
-               axios.post("http://localhost3001/doctor/createReport",formData,{
+               axios.post("http://localhost:3001/doctor/createReport",{
+                patientId : patientId,
+                doctorId : doctorId,
+                medicine : medicineList,
+                symptoms : symptom,
+                tests : tests,
+               },{
                 headers :{
-                'Content-Type': 'form-data',
+                    'Authorization': "Bearer " + localStorage.getItem('token').slice(1,-1),
                  },
                }),
                {
@@ -70,6 +93,26 @@ const Treatment = () => {
             <div className="text-center mb-2 d-flex justify-content-center">
                     <h5 className="border-success border-bottom w-25 pb-2 border-5">Report</h5>
                 </div>
+                <div className="col-md-12">
+        <div className="invoice-info p-2 rounded" style={{ background: '#c9c9c92b' }}>
+            <div className="invoice-details invoice-details-two " >
+                <h3>Doctor Name : {doctor.fullName} </h3>
+                <p>Specialist : {doctor.specialist} </p>
+                <p>Location : {doctor.location}</p>
+            </div>
+        </div>
+    </div>
+    <div className="col-md-12">
+        <div className="invoice-info p-2 rounded">
+            <div className="invoice-details invoice-details-two">
+                <h3>Patient Name : {patient.fullName} </h3>
+                <p>Age : {patient.age} </p>
+                <p>Sex: {patient.sex}</p>
+                <p>Location : {patient.location} </p>
+
+            </div>
+        </div>
+    </div>
                 <form className="row form-row" >
                     <div className="col-md-12">
                         <div className="card p-3 mb-3">
@@ -161,7 +204,7 @@ const Treatment = () => {
                         </div>
                     </div>
                     <div className='text-center my-3'>
-                        <Button htmlType='submit' type="primary" size='large' onClick={handleSubmit}>
+                        <Button type="primary" size='large' onClick={handleSubmit}>
                             Submit
                         </Button>
                     </div>

@@ -2,8 +2,8 @@ import { application } from "express";
 import axios from "axios";
 import Doctor from "../models/doctor.js";
 import Patient from "../models/Patient.js";
+import Report from "../models/Report.js";
 import { errorMonitor } from "events";
-import { error } from "console";
 // Assuming your _id value is stored in a variable called idValue
 
 const processor = async (doctorId) => {
@@ -87,7 +87,6 @@ export const bookAppointment = async (req, res) => {
       });
     }
     const { startTime, endTime } = doctor;
-    console.log(timings);
     const patientTime = parseInt(time);
     const startTimeHours = parseInt(time.split(":")[0]),
       startTimeMinutes = parseInt(time.split(":")[1]);
@@ -266,18 +265,3 @@ export const getPatient = async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 };
-
-export const checkFriend = async (req, res) => {
-  try {
-    const { patientId, doctorId } = req.params;
-
-    const doctor = await Doctor.findById(doctorId);
-    let exists = false;
-    if (doctor.patientList.indexOf(patientId) != -1) {
-      exists = true;
-    }
-    res.status(200).json({ result: exists });
-  } catch (err) {
-    res.status(404).json({ error: error.message });
-  }
-}

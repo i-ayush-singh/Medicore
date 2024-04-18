@@ -118,19 +118,19 @@ export const handleRequest = async (req, res) => {
     if (result === "true") {
       doctor.patientList.push(patientId);
       patient.doctorList.push(doctorId);
-      const doctorInformation = [
-        `name: ${doctor.fullName}`,
-        `email: ${doctor.email}`,
-        `specialist: ${doctor.specialist}`,
-        `location: ${doctor.location}`,
-      ]
-      const basicInformation = [
-        `Name: ${patient.fullName}`,
-        `Email: ${patient.email}`,
-        `Age: ${patient.age}`,
-        `Blood: ${patient.blood}`,
-        `Sex: ${patient.sex}`,
-      ];
+      const doctorInformation = {
+        name: doctor.fullName,
+        email: doctor.email,
+        specialist: doctor.specialist,
+        location: doctor.location,
+      };
+      const basicInformation = {
+        name: patient.fullName,
+        email: patient.email,
+        age: patient.age,
+        blood: patient.blood,
+        sex: patient.sex,
+      };
 
       const newReport = new Report({
         basicInformation,
@@ -185,7 +185,9 @@ export const createReport = async (req, res) => {
       symptoms,
       tests,
     } = req.body;
-
+    console.log(patientId);
+    console.log(medicine);
+    console.log(tests);
     const doctor = await Doctor.findById(doctorId);
 
     const report = await Report.findById(doctor.files.get(patientId));

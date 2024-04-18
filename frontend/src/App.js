@@ -12,10 +12,9 @@ import Treatment from "./components/Report.jsx";
 import { Notifications } from "./components/Notifications.jsx";
 import { PatientAPP } from "./Pages/PatientAPP.jsx";
 import { ChatTest } from "./Pages/ChatTest.jsx";
-import { Viewreport } from "./components/viewreport.jsx";
+import { ViewReport } from "./components/viewreport.jsx";
 import { About } from "./Pages/AboutUs.jsx";
 import { Card } from "./components/commoncomp.jsx"
-
 
 import { Docappointments } from "./Pages/Docappointments.jsx";
 
@@ -49,7 +48,7 @@ function App() {
         </Route>
         <Route path="/video" element={<LobbyScreen />} />
         <Route path="/room/:roomId" element={<RoomPage />} />
-        <Route path="/report" element={<Treatment />}></Route>
+        <Route path="/report/:doctorId/:patientId" element={<Treatment />}></Route>
         <Route path="/doctor/:doctorId" element={<ProfilePage />}></Route>
         <Route path="/dashboard"
           element={<Dashboard />}
@@ -76,7 +75,7 @@ function App() {
         <Route path="/notificationsP" element={<Notifications />}></Route>
 
 
-       
+
 
         <Route path="/MyDoctors"
         element={<MyDoctors/>}
@@ -101,7 +100,7 @@ function App() {
         
 
         <Route path="/About" element={<About />}></Route>
-        <Route path="/viewreport" element={<Viewreport />}></Route>
+        <Route path="/viewreport/:doctorId/:patientId" element={<ViewReport />}></Route>
         <Route path="/Profd" element={<ProfileDoc />}></Route>
         <Route path="/chat" element={<ChatTest />}></Route>
         <Route path="/common/:doctorId/:patientId" element={<Card />}></Route>

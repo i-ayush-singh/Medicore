@@ -11,11 +11,13 @@ import {
   editDataP,
   getPatient,
   checkFriend,
+  ViewReport,
 } from "../controllers/patient.js";
 import { verifyToken } from "../middleware/auth.js";
 import express from "express";
 
 const router = express.Router();
+router.get("/viewReport/:patientId/:doctorId",verifyToken,ViewReport);
 router.get("/sendnotifications/:patientId", verifyToken, sendNotifications);
 router.patch("/request/:doctorId", verifyToken, requestAppointment);
 router.patch("/booking/:doctorId", verifyToken, bookAppointment);

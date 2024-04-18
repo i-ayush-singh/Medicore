@@ -42,10 +42,7 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
-app.use("/auth", authRoutes);
-app.use("/doctor", doctorRoutes);
-app.use("/patient", patientRoutes);
-app.use("/chat", chatRoutes);
+
 // File Storage
 
 //requests with data
@@ -53,7 +50,10 @@ app.post("/auth/patient/register", upload.single("picture"), registerPatient);
 app.post("/auth/doctor/register", upload.single("picture"), registerDoctor);
 app.patch("/edit/patient", upload.single("picture"), verifyToken, editDataP);
 app.patch("/edit/doctor", upload.single("picture"), verifyToken, editDataD);
-
+app.use("/auth", authRoutes);
+app.use("/doctor", doctorRoutes);
+app.use("/patient", patientRoutes);
+app.use("/chat", chatRoutes);
 //mongoose setup
 mongoose
   .connect(process.env.MONGO_URL)
@@ -74,7 +74,6 @@ const emailToSocketIdMap = new Map();
 const socketidToEmailMap = new Map();
 
 io.on("connection", (socket) => {
-  console.log(`Socket Connected`, socket.id);
   socket.on("room:join", (data) => {
     const { email, room } = data;
     emailToSocketIdMap.set(email, socket.id);
@@ -93,12 +92,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("peer:nego:needed", ({ to, offer }) => {
-    console.log("peer:nego:needed", offer);
     io.to(to).emit("peer:nego:needed", { from: socket.id, offer });
   });
 
   socket.on("peer:nego:done", ({ to, ans }) => {
-    console.log("peer:nego:done", ans);
     io.to(to).emit("peer:nego:final", { from: socket.id, ans });
   });
 });
