@@ -9,8 +9,6 @@ export function Appointment(props){
     date: "",
     time: "",
   });
-  console.log(props.userId)
-  console.log(props.doctorId)
 const inputChange = (e) => {
     const { name, value } = e.target;
      return setFormDetails({
@@ -46,7 +44,7 @@ async function BookAppointment(){
         aria-labelledby="contained-modal-title-vcenter"
         centered>
         <Modal.Header closeButton>
-          <Modal.Title>Create Post</Modal.Title>
+          <Modal.Title>Add Appointment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Form>

@@ -6,6 +6,7 @@ import { Navbar } from "../../components/Navbar";
 import { SidebarP } from "../../components/SidebarP";
 import { Appointment } from "../../components/Appointment";
 import StarRating from "../../components/StarRating";
+import { AddReview } from "../../components/AddReview";
 export function ProfilePage() {
     const { doctorId } = useParams();
     const [user, setUser] = useState({});
@@ -13,10 +14,14 @@ export function ProfilePage() {
     const [request, setRequest] = useState({});
     const xyz = JSON.parse(localStorage.getItem('user'));
     const [showPopup, setShowPopup] = useState(false);
+    const [showPopupa,setShowPopupa] = useState(false);
     const [reviews, setReviews] = useState([]);
-    const [friend,setFriend] = useState();
+    const [friend, setFriend] = useState();
     const togglePopup = () => {
         setShowPopup(true);
+    }
+    const togglePopupa = () => {
+        setShowPopupa(true);
     }
     const getDoctor = async () => {
         const response = await axios.get(`http://localhost:3001/doctor/getdoctor/${doctorId}`, {
@@ -86,34 +91,34 @@ export function ProfilePage() {
         gettingReviews();
     }, []);
 
-    async function checkFriend(){
-        try{
-         const response = await axios.get(`http://localhost:3001/patient/checkFriend/${user._id}/${doctorId}`,{
-            headers:{
-                'Authorization': "Bearer " + localStorage.getItem('token').slice(1, -1),
-            }
-         })
-         setFriend(response.data.result);
-         console.log(response.data.result);
-        }catch(err){
+    async function checkFriend() {
+        try {
+            const response = await axios.get(`http://localhost:3001/patient/checkFriend/${user._id}/${doctorId}`, {
+                headers: {
+                    'Authorization': "Bearer " + localStorage.getItem('token').slice(1, -1),
+                }
+            })
+            setFriend(response.data.result);
+            console.log(response.data.result);
+        } catch (err) {
             console.log(err);
         }
     }
-    useEffect(()=>{
+    useEffect(() => {
         checkFriend();
-    },[SendRequest]);
+    }, [SendRequest]);
 
-    const RequestData = ({}) => {
+    const RequestData = ({ }) => {
         Request();
-        if(friend === true){
-            return(
-              <div >
-                <button type="button" class="flex text-white bg-green-500 hover:bg-green-800 focus:outline-none focus:ring-4 focus:bg-green-300 font-medium rounded-full text-sm px-3 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"> 
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 ">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-                </svg>
-                Accepted</button>
-              </div>
+        if (friend === true) {
+            return (
+                <div >
+                    <button disabled type="button" class="flex cursor-not-allowed text-white bg-green-500 hover:bg-green-800 focus:outline-none focus:ring-4 focus:bg-green-300 font-medium rounded-full text-sm px-3 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 ">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                        </svg>
+                        Accepted</button>
+                </div>
             );
         }
         else if (request === true) {
@@ -140,14 +145,14 @@ export function ProfilePage() {
     };
 
     const ReviewButton = () => {
-        if(friend === true){
-            return(
+        if (friend === true) {
+            return (
                 <div>
-                    <button type="button" class="flex text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Add Review  
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pl-1">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-                    </svg>
+                    <button onClick={togglePopupa} type="button" class="flex text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Add Review
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pl-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+                        </svg>
                     </button>
                 </div>
             )
@@ -170,7 +175,7 @@ export function ProfilePage() {
                                     <img
                                         alt="doctor"
                                         src={`http://localhost:3001/assets/${doctor.picturePath}`}
-                                        className="h-4/5 w-4/5"
+                                        className="h-60 w-52 pl-5"
                                     />
                                 </div>
                                 <div className="col-md-6">
@@ -194,11 +199,12 @@ export function ProfilePage() {
                                             <button onClick={togglePopup} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Appointment</button>
                                             <Appointment show={showPopup} setShow={setShowPopup} doctorId={doctor._id} userId={user._id} />
                                         </div>
-                                        
+
                                     </div>
                                     <div>
-                                           <ReviewButton/>
-                                        </div>
+                                        <ReviewButton />
+                                          <AddReview  show={showPopupa} setShow={setShowPopupa} doctorId={doctor._id} patientId={user._id}/>
+                                    </div>
                                 </div>
                             </div>
                             <div className="row-span-2 col-span-8">
@@ -211,13 +217,13 @@ export function ProfilePage() {
                                             <div className="border ring-2 rounded m-2 p-2">
                                                 <div className="flex">
                                                     <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src={`http://localhost:3001/assets/${ele.picturePath}`} alt="Bordered avatar" />
-                                                       <div className="ml-2 font-serif">{ele.fullName}</div>
+                                                    <div className="ml-2 font-serif">{ele.fullName}</div>
                                                 </div>
                                                 <div className="flex p-2 gap-2 ">
                                                     <div className="pb-2 font-serif"> Rating:- </div>
-                                                    <StarRating rating = {ele.myReview.rating}/>
-                                                </div> 
-                                                <div className="flex"> 
+                                                    <StarRating rating={ele.myReview.rating} />
+                                                </div>
+                                                <div className="flex">
                                                     <div className="mr-2 font-serif">Comment :-</div>
                                                     <div>{ele.myReview.comment}                                                 </div>
                                                 </div>
