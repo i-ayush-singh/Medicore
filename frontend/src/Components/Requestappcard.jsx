@@ -42,7 +42,7 @@ export const Requestappcard= ({ ele }) => {
             <h5 class="text-xl font-semibold tracking-tight text-black-700 dark:text-white">{ele.patient.age}</h5>
             <h5 class="text-xl font-semibold tracking-tight text-black-700 dark:text-white">{ele.patient.location}</h5>
             <h5 class="text-xl font-semibold tracking-tight text-black-700 dark:text-white">{ele.date}</h5>
-            <h5 class="text-xl font-semibold tracking-tight text-black-700 dark:text-white">{ele.time}</h5>
+            <h5 class="text-xl font-semibold tracking-tight text-black-700 dark:text-white">{ele.time.hours}: {ele.time.minutes}</h5>
         <button onClick={()=> handleappointment("true")}>Accept</button>
         <button onClick={() => handleappointment("false")}>reject</button>
     </div>

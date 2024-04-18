@@ -83,7 +83,7 @@ export function Docappointments() {
                     </td>
                     <td className={classes}>
                       <Typography variant="small" color="blue-gray" className="font-normal">
-                        {time}
+                        {time.hours}:{time.minutes}
                       </Typography>
                     </td>
                     <td className={`${classes} bg-blue-gray-50/50`}>

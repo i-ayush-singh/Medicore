@@ -36,6 +36,7 @@ const DoctorSchema = new mongoose.Schema(
     },
     patientList: {
       type: Array,
+      default:[],
     },
     appointmentRequests: {
       type: Array,

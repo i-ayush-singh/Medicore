@@ -48,7 +48,7 @@ function App() {
         </Route>
         <Route path="/video" element={<LobbyScreen />} />
         <Route path="/room/:roomId" element={<RoomPage />} />
-        <Route path="/report" element={<Treatment />}></Route>
+        <Route path="/report/:doctorId/:patientId" element={<Treatment />}></Route>
         <Route path="/doctor/:doctorId" element={<ProfilePage />}></Route>
         <Route path="/dashboard"
           element={<Dashboard />}
@@ -100,7 +100,7 @@ function App() {
         
 
         <Route path="/About" element={<About />}></Route>
-        <Route path="/viewreport" element={<ViewReport />}></Route>
+        <Route path="/viewreport/:doctorId/:patientId" element={<ViewReport />}></Route>
         <Route path="/Profd" element={<ProfileDoc />}></Route>
         <Route path="/chat" element={<ChatTest />}></Route>
         <Route path="/common/:doctorId/:patientId" element={<Card />}></Route>
