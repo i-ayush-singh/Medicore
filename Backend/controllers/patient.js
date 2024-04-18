@@ -2,7 +2,9 @@ import { application } from "express";
 import axios from "axios";
 import Doctor from "../models/doctor.js";
 import Patient from "../models/Patient.js";
+import Report from "../models/Report.js";
 import { errorMonitor } from "events";
+
 // Assuming your _id value is stored in a variable called idValue
 
 const processor = async (doctorId) => {
@@ -86,7 +88,6 @@ export const bookAppointment = async (req, res) => {
       });
     }
     const { startTime, endTime } = doctor;
-    console.log(timings);
     const patientTime = parseInt(time);
     const startTimeHours = parseInt(time.split(":")[0]),
       startTimeMinutes = parseInt(time.split(":")[1]);
@@ -261,6 +262,18 @@ export const getPatient = async (req, res) => {
     const patient = await Patient.findById(patientId);
 
     res.status(201).json(patient);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+export const ViewReport = async (req, res) => {
+  try {
+    const {doctorId , patientId} = req.params;
+    const patient = await Patient.findById(patientId);
+
+    const report = await Report.findById(patient.files.get(doctorId));
+
+    res.status(201).json(report);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }

@@ -1,164 +1,3 @@
-// import React from "react";
-
-
-// export function ViewReport(){
-//     return (
-//         <div class="bg-gray-200">
-// <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
-//   <div class="flex items-center space-x-3 rtl:space-x-reverse h-20">
-//       <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Medicore Logo" />
-//       <span class="self-center text-3xl font-semibold whitespace-nowrap">Medex</span>
-//   </div></div>
-       
-//         <div class="bg-white">
-             
-            
-//         <div class="col-span-4">
-        
-//         <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 h-80 ">
-// <div class="max-w-lg bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 w-full">
-    
-//     <div class="flex flex-col justify-between p-2 leading-normal text-center pt-5">
-
-//         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Doctor Name</h5>
-//         <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">Specialist</h5>
-//         <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">Fee</h5>
-//         <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">Location</h5>
-        
-    
-// </div>
-// </div>
-
-// <div class="max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-60">
-    
-//     <div class="flex flex-col justify-between p-2 leading-normal text-center pt-5">
-
-//         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Patient Name</h5>
-//         <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">Age</h5>
-//         <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">Sex</h5>
-//         <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">Location</h5>
-//      </div>   
-//  </div>   
-// </div></div>
-// <div>
-
-
-// <div class="w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-// <h5 class="mb-4 text-xl font-bold text-gray-900 text-center ">Symptoms</h5>
-// <ul class="space-y-5 my-7">
-// <li class="flex">
-// <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-// <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-// </svg>
-// <span class="text-base font-normal leading-tight text-gray-900 ms-3">Headache</span>
-// </li>
-// <li class="flex">
-// <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-// <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-// </svg>
-// <span class="text-base font-normal leading-tight text-gray-900 ms-3">Fever</span>
-// </li>
-// <li class="flex">
-// <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-// <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-// </svg>
-// <span class="text-base font-normal leading-tight text-gray-900 ms-3">Cold</span>
-// </li></ul>
-
-// <h5 class="mb-4 text-xl font-bold text-gray-900 text-center ">Tests</h5>
-// <ul role="list" class="space-y-5 my-7">
-// <li class="flex items-center">
-// <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-// <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-// </svg>
-// <span class="text-base font-normal leading-tight text-gray-900 ms-3">Kidney</span>
-// </li>
-// <li class="flex">
-// <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-// <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-// </svg>
-// <span class="text-base font-normal leading-tight text-gray-900 ms-3">Liver</span>
-// </li>
-// <li class="flex">
-// <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-// <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-// </svg>
-// <span class="text-base font-normal leading-tight text-gray-900 ms-3">Heart</span>
-// </li></ul>
-
-
-// </div>
-// </div>
-
-    // <Card className="h-full w-full overflow-scroll px-40">
-    //   <table className="w-full min-w-max table-auto text-left">
-    //     <thead>
-    //       <tr>
-    //         {TABLE_HEAD.map((head) => (
-    //           <th
-    //             key={head}
-    //             className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-    //           >
-    //             <Typography
-    //               variant="small"
-    //               color="blue-gray"
-    //               className="font-normal leading-none opacity-70"
-    //             >
-    //               {head}
-    //             </Typography>
-    //           </th>
-    //         ))}
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {TABLE_ROWS.map(({ name, dosage, freq }, index) => {
-    //         const isLast = index === TABLE_ROWS.length - 1;
-    //         const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
- 
-    //         return (
-    //           <tr key={name}>
-    //             <td className={classes}>
-    //               <Typography
-    //                 variant="small"
-    //                 color="blue-gray"
-    //                 className="font-normal"
-    //               >
-    //                 {name}
-    //               </Typography>
-    //             </td>
-    //             <td className={classes}>
-    //               <Typography
-    //                 variant="small"
-    //                 color="blue-gray"
-    //                 className="font-normal"
-    //               >
-    //                 {dosage}
-    //               </Typography>
-    //             </td>
-    //             <td className={classes}>
-    //               <Typography
-    //                 variant="small"
-    //                 color="blue-gray"
-    //                 className="font-normal"
-    //               >
-    //                 {freq}
-    //               </Typography>
-    //             </td>
-    //           </tr>
-    //         );
-    //       })}
-    //     </tbody>
-    //   </table>
-    // </Card>
-// </div>
-// </div>
-
-//     )
-// }
-
-
-
-
 
 import React from "react";
 import "../Pages/ind.css"
@@ -167,8 +6,9 @@ import { useRef } from "react";
 import { FaPrint } from "react-icons/fa";
 import ReactToPrint from "react-to-print";
 import { Empty, Table, Button } from "antd";
-
-
+import { useParams } from "react-router-dom";
+import { useState,useEffect } from "react";
+import axios from "axios";
 const TABLE_HEAD = ["Medicine", "Dosage", "Frequency"];
 
  
@@ -219,7 +59,26 @@ const TABLE_ROWS = [
 // ]
 
 export function ViewReport(){
+const [report,setReport] = useState({});
+const {doctorId , patientId} = useParams();
+const fetchReport = async () => {
+  try{
+      let res = await axios.get(`http://localhost:3001/patient/viewReport/${patientId}/${doctorId}`, {
+          headers: {
+              'Authorization': "Bearer " + localStorage.getItem('token').slice(1,-1),
+          },
+      });
+      setReport(res.data);
+  } catch(error){
+      console.log(error);
+  }
 
+ 
+};
+useEffect(() => {
+  fetchReport();
+  
+}, []);
 const ref = useRef();
 let content = null;
 content =  <>
@@ -242,7 +101,7 @@ content =  <>
 <div className="col-md-12">
 <div className="invoice-info p-2 rounded" style={{ background: '#c9c9c92b' }}>
     <div className="invoice-details invoice-details-two " >
-        <h3>Doctor Name : </h3>
+        <h3>Doctor Name : {report.doctorInformation[0].split(":")[1]}</h3>
         <p>Specialist : </p>
         <p>Location : </p>
     </div>

@@ -42,10 +42,7 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
-app.use("/auth", authRoutes);
-app.use("/doctor", doctorRoutes);
-app.use("/patient", patientRoutes);
-app.use("/chat", chatRoutes);
+
 // File Storage
 
 //requests with data
@@ -53,7 +50,10 @@ app.post("/auth/patient/register", upload.single("picture"), registerPatient);
 app.post("/auth/doctor/register", upload.single("picture"), registerDoctor);
 app.patch("/edit/patient", upload.single("picture"), verifyToken, editDataP);
 app.patch("/edit/doctor", upload.single("picture"), verifyToken, editDataD);
-
+app.use("/auth", authRoutes);
+app.use("/doctor", doctorRoutes);
+app.use("/patient", patientRoutes);
+app.use("/chat", chatRoutes);
 //mongoose setup
 mongoose
   .connect(process.env.MONGO_URL)
