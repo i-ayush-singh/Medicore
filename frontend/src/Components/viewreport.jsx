@@ -163,8 +163,10 @@
 import React from "react";
 import "../Pages/ind.css"
 import { Card, Typography } from "@material-tailwind/react";
-
-
+import { useRef } from "react";
+import { FaPrint } from "react-icons/fa";
+import ReactToPrint from "react-to-print";
+import { Empty, Table, Button } from "antd";
 
 
 const TABLE_HEAD = ["Medicine", "Dosage", "Frequency"];
@@ -217,130 +219,151 @@ const TABLE_ROWS = [
 // ]
 
 export function ViewReport(){
-    return (
-        <>
+
+const ref = useRef();
+let content = null;
+content =  <>
         
-        <div class="bg-gray-200">
+<div class="bg-gray-200">
 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
-  <div class="flex items-center space-x-3 rtl:space-x-reverse h-20">
-       <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Medicore Logo" />
-       <span class="self-center text-3xl font-semibold whitespace-nowrap">Medex</span>
-   </div></div>
-   
+<div class="flex items-center space-x-3 rtl:space-x-reverse h-20">
+<img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Medicore Logo" />
+<span class="self-center text-3xl font-semibold whitespace-nowrap">Medex</span>
+</div></div>
 
-   </div>
 
-   
+</div>
+
+
 
 
 <div className="invoice-item">
 <div className="row">
-    <div className="col-md-12">
-        <div className="invoice-info p-2 rounded" style={{ background: '#c9c9c92b' }}>
-            <div className="invoice-details invoice-details-two " >
-                <h3>Doctor Name : </h3>
-                <p>Specialist : </p>
-                <p>Location : </p>
-            </div>
-        </div>
+<div className="col-md-12">
+<div className="invoice-info p-2 rounded" style={{ background: '#c9c9c92b' }}>
+    <div className="invoice-details invoice-details-two " >
+        <h3>Doctor Name : </h3>
+        <p>Specialist : </p>
+        <p>Location : </p>
     </div>
-    <div className="col-md-12">
-        <div className="invoice-info p-2 rounded">
-            <div className="invoice-details invoice-details-two">
-                <h3>Patient Name : </h3>
-                <p>Age : </p>
-                <p>Sex: </p>
-                <p>Location : </p>
+</div>
+</div>
+<div className="col-md-12">
+<div className="invoice-info p-2 rounded">
+    <div className="invoice-details invoice-details-two">
+        <h3>Patient Name : </h3>
+        <p>Age : </p>
+        <p>Sex: </p>
+        <p>Location : </p>
 
-            </div>
-        </div>
     </div>
+</div>
+</div>
 
-    <div className="invoice-item invoice-table-wrap">
-                        <div className="row border-top border-2">
-                            <div className="col-md-3 col-xl-3 border-end border-2 symptoms-section">
-                                <div className="mt-3">
-                                    <div class="p-3 text-center">
-                                        <h3 class="text-bold text-4xl pb-3 text-slate-500">SYMPTOMS</h3>
-                                        <h4>Headache</h4>
-                                        <h4>Pain</h4>
-                                        <h4>Fever</h4>
-                                    </div>
-                                    
-                                    <div class="p-3 text-center">
-                                    <h3 class="text-bold text-4xl pb-3 text-slate-500">TESTS</h3>
-                                        <h4>Heart</h4>
-                                        <h4>X-Ray</h4>
-                                        <h4>Liver</h4>
-                                    </div>
-                                    
-                                </div>
+<div className="invoice-item invoice-table-wrap">
+                <div className="row border-top border-2">
+                    <div className="col-md-3 col-xl-3 border-end border-2 symptoms-section">
+                        <div className="mt-3">
+                            <div class="p-3 text-center">
+                                <h3 class="text-bold text-4xl pb-3 text-slate-500">SYMPTOMS</h3>
+                                <h4>Headache</h4>
+                                <h4>Pain</h4>
+                                <h4>Fever</h4>
                             </div>
-                            <div className="col-md-9 col-xl-9 px-0">
-                            <Card className="h-full w-full overflow-scroll px-40">
-      <table className="w-full min-w-max table-auto text-left">
-        <thead>
-          <tr>
-            {TABLE_HEAD.map((head) => (
-              <th
-                key={head}
-                className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-              >
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="font-normal leading-none opacity-70"
-                >
-                  {head}
-                </Typography>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {TABLE_ROWS.map(({ name, dosage, freq }, index) => {
-            const isLast = index === TABLE_ROWS.length - 1;
-            const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
- 
-            return (
-              <tr key={name}>
-                <td className={classes}>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal"
-                  >
-                    {name}
-                  </Typography>
-                </td>
-                <td className={classes}>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal"
-                  >
-                    {dosage}
-                  </Typography>
-                </td>
-                <td className={classes}>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal"
-                  >
-                    {freq}
-                  </Typography>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </Card>
+                            
+                            <div class="p-3 text-center">
+                            <h3 class="text-bold text-4xl pb-3 text-slate-500">TESTS</h3>
+                                <h4>Heart</h4>
+                                <h4>X-Ray</h4>
+                                <h4>Liver</h4>
                             </div>
+                            
                         </div>
-                    </div></div></div>
+                    </div>
+                    <div className="col-md-9 col-xl-9 px-0">
+                    <Card className="h-full w-full overflow-scroll px-40">
+<table className="w-full min-w-max table-auto text-left">
+<thead>
+  <tr>
+    {TABLE_HEAD.map((head) => (
+      <th
+        key={head}
+        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+      >
+        <Typography
+          variant="small"
+          color="blue-gray"
+          className="font-normal leading-none opacity-70"
+        >
+          {head}
+        </Typography>
+      </th>
+    ))}
+  </tr>
+</thead>
+<tbody>
+  {TABLE_ROWS.map(({ name, dosage, freq }, index) => {
+    const isLast = index === TABLE_ROWS.length - 1;
+    const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+
+    return (
+      <tr key={name}>
+        <td className={classes}>
+          <Typography
+            variant="small"
+            color="blue-gray"
+            className="font-normal"
+          >
+            {name}
+          </Typography>
+        </td>
+        <td className={classes}>
+          <Typography
+            variant="small"
+            color="blue-gray"
+            className="font-normal"
+          >
+            {dosage}
+          </Typography>
+        </td>
+        <td className={classes}>
+          <Typography
+            variant="small"
+            color="blue-gray"
+            className="font-normal"
+          >
+            {freq}
+          </Typography>
+        </td>
+      </tr>
+    );
+  })}
+</tbody>
+</table>
+</Card>
+                    </div>
+                </div>
+            </div></div></div>
 </>
+
+
+    return (
+       <>
+       <div className="content">
+                <div className="d-flex justify-content-end" style={{ marginRight: '42rem', marginBottom: '1rem' , marginTop: '1rem'}}>
+                    <ReactToPrint
+                        bodyClass="print-agreement"
+                        content={() => ref.current}
+                        trigger={() => (<Button type="primary" icon={<FaPrint />}> Print</Button>)}
+                    />
+                </div>
+                <div className="container-fluid" ref={ref}>
+                    <div className="row">
+                        {content}
+                    </div>
+                </div>
+            </div>
+       </>
 
    
     )
