@@ -35,35 +35,35 @@ function App() {
   return (
     // <Router>
     <div>
-      <Toaster/>
+      <Toaster />
       <Routes>
         <Route path="/login"
-        element={<LoginP/>}
+          element={<LoginP />}
         >
         </Route>
-        <Route path="/video" element={<LobbyScreen />}/>
-        <Route path="/room/:roomId" element={<RoomPage />}/>
-        <Route path="/report" element={<Treatment/>}></Route>
-        <Route path="/doctor/:doctorId" element={<ProfilePage/>}></Route>
+        <Route path="/video" element={<LobbyScreen />} />
+        <Route path="/room/:roomId" element={<RoomPage />} />
+        <Route path="/report" element={<Treatment />}></Route>
+        <Route path="/doctor/:doctorId" element={<ProfilePage />}></Route>
         <Route path="/dashboard"
-        element={<Dashboard/>}
+          element={<Dashboard />}
         ></Route>
         <Route path="/"
-        element = {<Landing/>}></Route>
+          element={<Landing />}></Route>
         <Route path="/signup/patient"
-        element={<SignupP/>}
+          element={<SignupP />}
         ></Route>
         <Route path="/signup/doctor"
-        element={<SignupD/>}
+          element={<SignupD />}
         ></Route>
         <Route path="/home"
-        element={<Navbar/>}
+          element={<Navbar />}
         ></Route>
         <Route path="/doctors"
-        element={<Doctors/>}
+          element={<Doctors />}
         ></Route>
         <Route path="/dashboardP"
-        element={<DashboardP/>}
+          element={<DashboardP />}
         ></Route>
 
         <Route path="/PatientAPP" element={<PatientAPP />}></Route>
@@ -81,7 +81,7 @@ function App() {
         <Route path="/Profd" element={<ProfileDoc />}></Route>
         <Route path="/chat" element={<ChatTest />}></Route>
       </Routes>
-    
+
     </div>
   );
 }

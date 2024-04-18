@@ -12,8 +12,8 @@ export function ProfilePage(){
     const [request,setRequest] = useState({});
     const xyz = JSON.parse(localStorage.getItem('user'));
     const [showPopup, setShowPopup] = useState(false);
+    const [reviews,setReviews] = useState([]);
     const togglePopup = () => {
-        console.log("HI")
         setShowPopup(true);
     }
     const getDoctor = async() =>{
@@ -62,6 +62,27 @@ export function ProfilePage(){
         await SendRequest();
      }
      
+     async function getReviews(){
+        try{
+          const response = await axios.get(`http://localhost:3000/doctor/getReviews/${doctorId}`,{
+            headers:{
+                'Authorization': "Bearer " + localStorage.getItem('token').slice(1,-1),
+            }
+          })
+          console.log(response.data);
+          setReviews(response.data);
+        }catch(err){
+            console.log(err);
+        }
+     }
+     
+     const gettingReviews = async() =>{
+        await getReviews();
+     }
+
+     useEffect(()=>{
+        gettingReviews();
+     },[]);
         const RequestData = ({}) =>{
             Request();
             if(request === true ){
@@ -98,7 +119,7 @@ export function ProfilePage(){
         <div className="flex justify-center col-span-3">
             
             <Wrapper >
-            <div className="grid grid-rows-8 grid-cols-10 grid-flow-row gap-8 flex-wrap">
+            <div className="grid grid-rows-8 grid-cols-10  gap-5">
             <div className=" row-span-5 col-span-5">
             <img
              alt="doctor"
@@ -109,7 +130,7 @@ export function ProfilePage(){
             <div className="flex-wrap row-span-6 col-span-5">
             <div className="row-span-1 col-span-5 font-bold">
                 PROFILE
-                <div className="row-span-1 col-span-4 w-full  h-1 bg-black"/>
+                <div className="row-span-1 col-span-4 w-full  h-0.5 bg-black"/>
             </div>
             <div className="row-span-1 col-span-5 font-bold text-3xl text-sky-600 font-serrif"> 
                 Dr. {doctor.fullName}
@@ -126,6 +147,21 @@ export function ProfilePage(){
             <button onClick={togglePopup} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Appointment</button>
             <Appointment show = {showPopup} setShow = {setShowPopup} doctorId = {doctor._id} userId = {user._id}/>
             </div>
+            </div>
+            <div className="row-span-2 col-span-10"> 
+                <h3>Reviews</h3>
+                <div className="row-span-1 col-span-10 w-full h-0.5 bg-black"/>
+                <div>
+                    {reviews.map((ele)=>{
+                      return (
+                        <div>
+                            ele.fullName<br/>
+                            ele.myReview.rating<br/>
+                            ele.myReview.comment<br/>
+                        </div> 
+                      )
+                    })}
+                </div>
             </div>
             </div>
             </Wrapper>

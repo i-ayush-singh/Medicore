@@ -10,7 +10,6 @@ import SelectFormForMedicine from "../form/SelectFormForMedicine";
 import axios from "axios";
 import { MedicalCheckupOptions,DosageOptions,FrequencyOptions,MedicalSymptomsOptions } from "../constants/global";
 const Treatment = () => {
-   
     const { doctorId,patientId } = useParams();
     const [loading, setloading] = useState(false);
     const [symptom,setSymptom] = useState([]);
