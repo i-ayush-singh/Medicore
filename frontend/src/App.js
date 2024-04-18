@@ -12,8 +12,13 @@ import Treatment from "./components/Report.jsx";
 import { Notifications } from "./components/Notifications.jsx";
 import { PatientAPP } from "./Pages/PatientAPP.jsx";
 import { ChatTest } from "./Pages/ChatTest.jsx";
-
+import { Viewreport } from "./components/viewreport.jsx";
 import { About } from "./Pages/AboutUs.jsx";
+import { Card } from "./components/commoncomp.jsx"
+
+
+import { Docappointments } from "./Pages/Docappointments.jsx";
+
 
 import ImageUploader from "./Pages/check.jsx";
 
@@ -27,6 +32,7 @@ import { Navbar } from "./components/Navbar.jsx";
 import { NavbarD } from "./components/NavbarD.jsx";
 import { Apprequest } from "./Pages/Apprequest.jsx";
 import { Requests } from "./Pages/Requestpage.jsx";
+import { AnalogClock }from "./Pages/clockpage.jsx"
 const URL =
   process.env.NODE_ENV === "production" ? undefined : "http://localhost:4000";
 
@@ -69,17 +75,38 @@ function App() {
         <Route path="/PatientAPP" element={<PatientAPP />}></Route>
         <Route path="/notificationsP" element={<Notifications />}></Route>
 
-        <Route path="/MyDoctors" element={<MyDoctors />}></Route>
-        <Route path="/apprequest" element={<Apprequest />}></Route>
 
-        <Route path="/Prof" element={<ProfilePages />}></Route>
+       
 
-        <Route path="/Requests" element={<Requests />}></Route>
+        <Route path="/MyDoctors"
+        element={<MyDoctors/>}
+        ></Route>
+        <Route path="/apprequest"
+        element={<Apprequest/>}
+        ></Route>
+         
+         <Route path="/Prof"
+        element={<ProfilePages/>}
+        ></Route>
+        
+        <Route path="/Requests"
+        element={<Requests/>}
+        ></Route>
+       <Route path="/docappointments"
+        element = {<Docappointments/>}
+        ></Route>
+
+        
+
+        
 
         <Route path="/About" element={<About />}></Route>
-
+        <Route path="/viewreport" element={<Viewreport />}></Route>
         <Route path="/Profd" element={<ProfileDoc />}></Route>
         <Route path="/chat" element={<ChatTest />}></Route>
+        <Route path="/common/:doctorId/:patientId" element={<Card />}></Route>
+        <Route path="/clk" element={<AnalogClock/>}></Route>
+
       </Routes>
 
     </div>

@@ -26,10 +26,7 @@ dotenv.config();
 //middleware
 app.use(express.json());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
-app.use("/auth", authRoutes);
-app.use("/doctor", doctorRoutes);
-app.use("/patient", patientRoutes);
-app.use("/chat", chatRoutes);
+
 
 //server setup for socket
 socketSetup();
@@ -47,10 +44,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 app.use("/auth", authRoutes);
 app.use("/doctor", doctorRoutes);
-app.patch("/edit/patient", upload.single("picture"), verifyToken, editDataP);
 app.use("/patient", patientRoutes);
 app.use("/chat", chatRoutes);
-
 // File Storage
 
 //requests with data

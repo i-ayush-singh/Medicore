@@ -95,7 +95,7 @@ export const getDoctorsByDistance = async (req, res) => {
 export const getDoctor = async (req, res) => {
   try {
     const { doctorId } = req.params;
-
+    console.log(doctorId);
     const doctor = await Doctor.findById(doctorId);
 
     res.status(201).json(doctor);
@@ -335,21 +335,20 @@ export const editDataD = async (req, res) => {
     res.status(407).json({ error: error.message });
   }
 };
-
 export const getDoctorReviews = async (req, res) => {
   try {
     const { doctorId } = req.params;
     const doctor = await Doctor.findById(doctorId);
 
     const patientReviews = await Promise.all(
-      doctor.reviews.forEach(async (key, value) => {
-        const patient = await Patient.findById(key);
+      Array.from(doctor.reviews.keys()).map(async (patientId) => {
+        const patient = await Patient.findById(patientId);
+        const review = doctor.reviews.get(patientId); // Get the review object from the map
         const newObj = {
           fullName: patient.fullName,
           picturePath: patient.picturePath,
-          myReview: value,
+          myReview: review,
         };
-
         return newObj;
       })
     );
@@ -359,3 +358,35 @@ export const getDoctorReviews = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const getdocAppointments = async (req, res) => {
+  try {
+    const { doctorId } = req.params;
+    const doctor = await Doctor.findById(doctorId);
+    const appointments = await Promise.all(
+      doctor.appointments.map(async (appointmentObj) => {
+        const { date, time } = appointmentObj;
+        const patient = await Patient.findById(appointmentObj.patientId);
+
+        const { fullName, picturePath, files, _id, location} = patient;
+        const newObj = {
+          date,
+          time,
+          patient: {
+            fullName,
+            picturePath,
+            files,
+            _id,
+            location,
+          },
+        };
+
+        return newObj;
+      })
+    );
+    res.status(200).json(appointments);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+

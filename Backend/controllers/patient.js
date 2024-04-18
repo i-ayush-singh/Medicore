@@ -72,7 +72,8 @@ export const requestAppointment = async (req, res) => {
 export const bookAppointment = async (req, res) => {
   try {
     const { doctorId } = req.params;
-    const { patientId, time, date } = req.body;
+    const { patientId, date } = req.body;
+    let { time } = req.body;
     console.log(patientId);
     console.log(time);
     console.log(date);
@@ -84,11 +85,16 @@ export const bookAppointment = async (req, res) => {
         error: "It seems you've not been assigned to this doctor yet",
       });
     }
-    const { timings } = doctor;
+    const { startTime, endTime } = doctor;
     console.log(timings);
     const patientTime = parseInt(time);
-    const startTime = parseInt(timings[0]),
-      endTime = parseInt(timings[1]);
+    const startTimeHours = parseInt(time.split(":")[0]),
+      startTimeMinutes = parseInt(time.split(":")[1]);
+
+    time = {
+      hours: startTimeHours,
+      minutes: startTimeMinutes,
+    };
 
     if (patientTime >= endTime || patientTime < startTime) {
       const message = `Sorry, Dr. ${doctor.fullName} is not available at that time`;
@@ -216,7 +222,7 @@ export const makeReview = async (req, res) => {
 
 export const editDataP = async (req, res) => {
   try {
-    console.log('hi');
+    console.log("hi");
     const { patientId, fullName, picturePath, age, sex, blood, location } =
       req.body;
     console.log(patientId);
@@ -246,5 +252,16 @@ export const editDataP = async (req, res) => {
     res.status(200).json(patient);
   } catch (error) {
     res.status(407).json({ error: error.message });
+  }
+};
+export const getPatient = async (req, res) => {
+  try {
+    const { patientId } = req.params;
+    console.log(patientId);
+    const patient = await Patient.findById(patientId);
+
+    res.status(201).json(patient);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
   }
 };

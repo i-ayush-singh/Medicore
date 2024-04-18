@@ -133,11 +133,27 @@ export const registerDoctor = async (req, res) => {
       location,
       specialist,
       fee,
-      timings,
     } = req.body;
 
+    let { startTime, endTime } = req.body;
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
+
+    const startTimeHours = parseInt(startTime.split(":")[0]),
+      startTimeMinutes = parseInt(startTime.split(":")[1]);
+
+    const endTimeHours = parseInt(endTime.split(":")[0]),
+      endTimeMinutes = parseInt(endTime.split(":")[1]);
+
+    startTime = {
+      hours: startTimeHours,
+      minutes: startTimeMinutes,
+    };
+
+    endTime = {
+      hours: endTimeHours,
+      minutes: endTimeMinutes,
+    };
 
     const locationObj = await axios.get(
       "https://geocode.maps.co/search?q=" +
@@ -159,7 +175,8 @@ export const registerDoctor = async (req, res) => {
       longitude,
       specialist,
       fee,
-      timings,
+      startTime,
+      endTime,
       files: [],
       requests: [],
       appointmentRequests: [],

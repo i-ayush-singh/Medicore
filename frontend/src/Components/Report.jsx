@@ -4,9 +4,9 @@ import SelectForm from "../form/SelectForm";
 import { useParams } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { Button } from "antd";
-import InputAutoCompleteForm from "../form/AutoCompleteForm";
+import InputAutoCompleteForm from "../form/autoCompleteForm";
+import SelectFormForMedicine from "../form/selectFormForMedicine";
 import toast from "react-hot-toast";
-import SelectFormForMedicine from "../form/SelectFormForMedicine";
 import axios from "axios";
 import { MedicalCheckupOptions,DosageOptions,FrequencyOptions,MedicalSymptomsOptions } from "../constants/global";
 const Treatment = () => {
