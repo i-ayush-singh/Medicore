@@ -339,7 +339,6 @@ export const getDoctorReviews = async (req, res) => {
   try {
     const { doctorId } = req.params;
     const doctor = await Doctor.findById(doctorId);
-
     const patientReviews = await Promise.all(
       Array.from(doctor.reviews.keys()).map(async (patientId) => {
         const patient = await Patient.findById(patientId);
@@ -389,4 +388,5 @@ export const getdocAppointments = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
 

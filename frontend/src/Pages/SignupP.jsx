@@ -74,7 +74,7 @@ export default function SignupP(){
               loading: "Registering user...",
             }
           );
-           return navigate("/login/patient");
+           return navigate("/login");
 
         }catch(error){
             console.log(error);
