@@ -254,3 +254,14 @@ export const editDataP = async (req, res) => {
     res.status(407).json({ error: error.message });
   }
 };
+export const getPatient = async (req, res) => {
+  try {
+    const { patientId } = req.params;
+    console.log(patientId);
+    const patient = await Patient.findById(patientId);
+
+    res.status(201).json(patient);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};

@@ -103,7 +103,7 @@ function App() {
         <Route path="/viewreport" element={<Viewreport />}></Route>
         <Route path="/Profd" element={<ProfileDoc />}></Route>
         <Route path="/chat" element={<ChatTest />}></Route>
-        <Route path="/common" element={<Card />}></Route>
+        <Route path="/common/:doctorId/:patientId" element={<Card />}></Route>
       </Routes>
     
     </div>

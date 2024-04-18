@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Card, Typography } from "@material-tailwind/react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { NavbarD } from "../components/NavbarD";
 import { Sidebar } from "../components/SidebarD";
 export function Docappointments() {
+  const navigate = useNavigate();
     const TABLE_HEAD = ["profile","Patient Name", "location", "Date", "Time", "handle appointment"];
     const doctor = JSON.parse(localStorage.getItem('user'));
     const doctorId = doctor._id;
@@ -85,7 +87,9 @@ export function Docappointments() {
                       </Typography>
                     </td>
                     <td className={`${classes} bg-blue-gray-50/50`}>
-                      <button as="a" href="#" variant="small" color="blue-gray" className="font-medium">
+                      <button onClick = {()=>{
+                        navigate(`/common/${doctor._id}/${patient._id}`)
+                      }}as="a" href="#" variant="small" color="blue-gray" className="font-medium">
                         view appointment
                       </button>
                     </td>
