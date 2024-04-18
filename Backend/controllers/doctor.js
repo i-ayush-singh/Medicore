@@ -95,7 +95,7 @@ export const getDoctorsByDistance = async (req, res) => {
 export const getDoctor = async (req, res) => {
   try {
     const { doctorId } = req.params;
-
+    console.log(doctorId);
     const doctor = await Doctor.findById(doctorId);
 
     res.status(201).json(doctor);
@@ -341,14 +341,14 @@ export const getDoctorReviews = async (req, res) => {
     const doctor = await Doctor.findById(doctorId);
 
     const patientReviews = await Promise.all(
-      doctor.reviews.forEach(async (key, value) => {
-        const patient = await Patient.findById(key);
+      Array.from(doctor.reviews.keys()).map(async (patientId) => {
+        const patient = await Patient.findById(patientId);
+        const review = doctor.reviews.get(patientId); // Get the review object from the map
         const newObj = {
           fullName: patient.fullName,
           picturePath: patient.picturePath,
-          myReview: value,
+          myReview: review,
         };
-
         return newObj;
       })
     );
@@ -358,6 +358,7 @@ export const getDoctorReviews = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
 export const getdocAppointments = async (req, res) => {
   try {
     const { doctorId } = req.params;
@@ -371,7 +372,7 @@ export const getdocAppointments = async (req, res) => {
         const newObj = {
           date,
           time,
-          doctor: {
+          patient: {
             fullName,
             picturePath,
             files,

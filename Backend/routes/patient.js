@@ -9,6 +9,7 @@ import {
   getAppointments,
   sendNotifications,
   editDataP,
+  getPatient,
 } from "../controllers/patient.js";
 import { verifyToken } from "../middleware/auth.js";
 import express from "express";
@@ -21,6 +22,7 @@ router.patch("/review/:doctorId", verifyToken, makeReview);
 router.post("/handleNotification", verifyToken, handleNotifications);
 router.get("/getMyReports/:patientId", verifyToken, getMyReports);
 router.get("/getMyDoctors/:patientId", verifyToken, getMyDoctors);
+router.get("/getpatient/:patientId", verifyToken, getPatient);
 router.get("/getAppointments/:patientId", verifyToken, getAppointments);
 router.get("/:patientId/:doctorId", verifyToken, getReport);
 

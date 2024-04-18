@@ -1,19 +1,59 @@
 import React from "react";
-
+import { useState,useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 export function Card(){
+    const { doctorId, patientId} = useParams();
+    const [doctor, setDoctor] = useState({});
+    const [patient, setPatient] = useState({});
+    const fetchdoctor = async () => {
+        try{
+            let res = await axios.get(`http://localhost:3001/doctor/getdoctor/${doctorId}`, {
+                headers: {
+                    'Authorization': "Bearer " + localStorage.getItem('token').slice(1,-1),
+                },
+            });
+  
+            console.log(res.data);
+            setDoctor(res.data);
+        } catch(error){
+            console.log(error);
+        }
+  
+       
+      };
+      const fetchpatient = async () => {
+        try{
+            let res = await axios.get(`http://localhost:3001/patient/getpatient/${patientId}`, {
+                headers: {
+                    'Authorization': "Bearer " + localStorage.getItem('token').slice(1,-1),
+                },
+            });
+  
+            console.log(res.data);
+            setPatient(res.data);
+        } catch(error){
+            console.log(error);
+        }
+       
+      };
+    useEffect(() => {
+        fetchpatient();
+        fetchdoctor();
+      }, []);
+      
     return(
         <div class="bg-gray-200 h-full"> 
 <div class="col-span-4">
         <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 h-78 ">
         <div class="p-3">
 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <img class="p-5 rounded-t-sm w-full h-60" src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="" />
+    <img class="p-5 rounded-t-sm w-full h-60" src={`http://localhost:3001/assets/${doctor.picturePath}`} alt="" />
     <div class="flex flex-col justify-between p-2 leading-normal text-center">
 
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Doctor Name</h5>
-        <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">Specialist</h5>
-        <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">Fee</h5>
-        <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">Location</h5>
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{doctor.fullName}</h5>
+        <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">{doctor.specialist}</h5>
+        <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">{doctor.location}</h5>
         
     
 </div>
@@ -21,13 +61,13 @@ export function Card(){
 <div class="p-3">
 
 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <img class="p-5 rounded-t-sm w-full h-60" src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="" />
+    <img class="p-5 rounded-t-sm w-full h-60" src={`http://localhost:3001/assets/${patient.picturePath}`} alt="" />
     <div class="flex flex-col justify-between p-2 leading-normal text-center">
 
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Patient Name</h5>
-        <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">Age</h5>
-        <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">Sex</h5>
-        <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">Location</h5>
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{patient.fullName}</h5>
+        <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">{patient.age}</h5>
+        <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">{patient.sex}</h5>
+        <h5 class="mb-2 text-1xl tracking-tight text-gray-900 ">{patient.location}</h5>
      </div>   
     
 </div></div>
