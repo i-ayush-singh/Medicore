@@ -135,11 +135,12 @@ export const getAppointments = async (req, res) => {
         const { date, time } = appointmentObj;
         const doctor = await Doctor.findById(appointmentObj.doctorId);
 
-        const { fullName, picturePath, files, specialist } = doctor;
+        const { fullName, picturePath, files, specialist ,_id} = doctor;
         const newObj = {
           date,
           time,
           doctor: {
+            _id,
             fullName,
             picturePath,
             files,
@@ -187,7 +188,6 @@ export const makeReview = async (req, res) => {
   try {
     const { rating, comment, patientId } = req.body;
     const { doctorId } = req.params;
-
     const doctor = await Doctor.findById(doctorId);
 
     if (doctor.patientList.indexOf(patientId) == -1) {
@@ -195,7 +195,7 @@ export const makeReview = async (req, res) => {
         error: "It seems you've not been assigned to this doctor yet",
       });
     }
-
+    
     const ratingObj = doctor.rating;
     const reviewObj = {
       rating,

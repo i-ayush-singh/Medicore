@@ -69,6 +69,7 @@ const fetchReport = async () => {
           },
       });
       setReport(res.data);
+      // console.log(report);
   } catch(error){
       console.log(error);
   }
@@ -79,6 +80,7 @@ useEffect(() => {
   fetchReport();
   
 }, []);
+console.log(report.doctorInformation?.name);
 const ref = useRef();
 let content = null;
 content =  <>
@@ -101,19 +103,19 @@ content =  <>
 <div className="col-md-12">
 <div className="invoice-info p-2 rounded" style={{ background: '#c9c9c92b' }}>
     <div className="invoice-details invoice-details-two " >
-        <h3>Doctor Name : {report.doctorInformation[0].split(":")[1]}</h3>
-        <p>Specialist : </p>
-        <p>Location : </p>
+        <h3>Doctor Name : {report.doctorInformation?.name}</h3>
+        <p>Specialist : {report.doctorInformation?.specialist}</p>
+        <p>Location : {report.doctorInformation?.location}</p>
     </div>
 </div>
 </div>
 <div className="col-md-12">
 <div className="invoice-info p-2 rounded">
     <div className="invoice-details invoice-details-two">
-        <h3>Patient Name : </h3>
-        <p>Age : </p>
-        <p>Sex: </p>
-        <p>Location : </p>
+        <h3>Patient Name :{report.basicInformation?.name} </h3>
+        <p>Age : {report.basicInformation?.age}</p>
+        <p>Sex: {report.basicInformation?.sex}</p>
+        <p>Blood Group : {report.basicInformation?.blood}</p>
 
     </div>
 </div>
@@ -125,16 +127,16 @@ content =  <>
                         <div className="mt-3">
                             <div class="p-3 text-center">
                                 <h3 class="text-bold text-4xl pb-3 text-slate-500">SYMPTOMS</h3>
-                                <h4>Headache</h4>
-                                <h4>Pain</h4>
-                                <h4>Fever</h4>
+                                {report.symptoms?.map((symptom) => (
+                              <h4>{symptom}</h4>
+                            ))}
                             </div>
                             
                             <div class="p-3 text-center">
                             <h3 class="text-bold text-4xl pb-3 text-slate-500">TESTS</h3>
-                                <h4>Heart</h4>
-                                <h4>X-Ray</h4>
-                                <h4>Liver</h4>
+                            {report.tests?.map((test) => (
+                              <h4>{test}</h4>
+                            ))}
                             </div>
                             
                         </div>
@@ -161,19 +163,19 @@ content =  <>
   </tr>
 </thead>
 <tbody>
-  {TABLE_ROWS.map(({ name, dosage, freq }, index) => {
-    const isLast = index === TABLE_ROWS.length - 1;
+  {report.medicine?.map(({ id, medicine, dosage, frequency }, index) => {
+    const isLast = index === report.medicine?.length - 1;
     const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
     return (
-      <tr key={name}>
+      <tr key={id}>
         <td className={classes}>
           <Typography
             variant="small"
             color="blue-gray"
             className="font-normal"
           >
-            {name}
+            {medicine}
           </Typography>
         </td>
         <td className={classes}>
@@ -191,7 +193,7 @@ content =  <>
             color="blue-gray"
             className="font-normal"
           >
-            {freq}
+            {frequency}
           </Typography>
         </td>
       </tr>

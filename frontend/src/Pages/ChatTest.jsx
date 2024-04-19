@@ -3,7 +3,7 @@
 import React, { useState , useEffect} from "react";
 import { useParams } from "react-router-dom"
 import { io } from "socket.io-client";
-
+import axios from "axios";
 const message = (props) => {
     return (<p>{props.contents}</p>);
 }
