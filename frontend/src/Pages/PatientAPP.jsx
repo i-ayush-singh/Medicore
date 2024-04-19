@@ -3,8 +3,10 @@ import { Card, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import { Navbar } from "../components/Navbar";
 import { SidebarP } from "../components/SidebarP";
- 
+import { useNavigate } from "react-router-dom";
+
 export function PatientAPP() {
+  const navigate = useNavigate();
     const TABLE_HEAD = ["Doctor Name", "Speacialist", "Date", "Time", "Status", "Report"];
     const xyz = JSON.parse(localStorage.getItem('user'));
     const patientId = xyz._id;
@@ -79,7 +81,7 @@ export function PatientAPP() {
                 </td>
                 <td className={`${classes} bg-blue-gray-50/50`}>
                   <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium">
-                    {time}
+                    {time.hours}:{time.minutes}
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -88,8 +90,10 @@ export function PatientAPP() {
                   </Typography>
                 </td>
                 <td className={`${classes} bg-blue-gray-50/50`}>
-                  <button as="a" href="#" variant="small" color="blue-gray" className="font-medium">
-                    report
+                  <button onClick = {()=>{
+                        navigate(`/common/${doctor._id}/${patientId}`)
+                      }}as="a" href="#" variant="small" color="blue-gray" className="font-medium">
+                    view appointment
                   </button>
                 </td>
               </tr>
