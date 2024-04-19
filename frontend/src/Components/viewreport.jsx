@@ -11,52 +11,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 const TABLE_HEAD = ["Medicine", "Dosage", "Frequency"];
 
+ 
 
-const TABLE_ROWS = [
-  {
-    name: "Aspirin",
-    dosage: "50 mg",
-    freq: "2 times",
-  },
-  {
-    name: "Aspirin",
-    dosage: "50 mg",
-    freq: "2 times",
-  },
-  {
-    name: "Aspirin",
-    dosage: "50 mg",
-    freq: "2 times",
-  },
-  {
-    name: "Aspirin",
-    dosage: "50 mg",
-    freq: "2 times",
-  },
-  {
-    name: "Aspirin",
-    dosage: "50 mg",
-    freq: "2 times",
-  },
-];
-
-// const columns = [
-//     {
-//         title: 'Medicine',
-//         dataIndex: 'medicine',
-//         key: 'medicine',
-//     },
-//     {
-//         title: 'Dosage',
-//         dataIndex: 'dosage',
-//         key: 'dosage',
-//     },
-//     {
-//         title: 'Frequency',
-//         dataIndex: 'frequency',
-//         key: 'frequency',
-//     },
-// ]
 
 export function ViewReport() {
   const [report, setReport] = useState({});
