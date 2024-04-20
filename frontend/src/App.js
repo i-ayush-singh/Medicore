@@ -17,7 +17,7 @@ import { About } from "./Pages/AboutUs.jsx";
 import { Card } from "./components/commoncomp.jsx"
 
 import { Docappointments } from "./Pages/Docappointments.jsx";
-
+import { AboutPage } from "./components/aboutpage.jsx"
 
 import ImageUploader from "./Pages/check.jsx";
 
@@ -73,7 +73,8 @@ function App() {
 
         <Route path="/PatientAPP" element={<PatientAPP />}></Route>
         <Route path="/notificationsP" element={<Notifications />}></Route>
-
+        <Route path="/abt" element={<AboutPage />}></Route>
+   
 
 
 
