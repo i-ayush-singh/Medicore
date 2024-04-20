@@ -45,6 +45,18 @@ export const Doctors = () =>{
               <SidebarP/>              
       </div>
       <div class="bg-gray-200 col-span-3">
+      <div className="px-4 py-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 ">
+        <select className="w-60 px-2 py-1 border rounded border-slate-200">
+        <option value="" disabled selected>Select Category</option>
+                <option value="name">Name</option>
+                <option value="specialist">Specialist</option>
+                <option value="location">Location</option>
+        </select>
+        <input type ="text" name = "Search" placeholder = "Search..." className="w-full px-2 py-1 border rounded border-slate-200"/>
+        </div>
+      
+      <div class="flex items-center justify-center p-4">
+  
           <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 ">
           {doctors.map((ele) => {
               return (
@@ -55,6 +67,7 @@ export const Doctors = () =>{
               );
             })}
           </div>
+        </div>
         </div>
         </div>
         </div>
