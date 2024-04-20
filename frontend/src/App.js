@@ -18,7 +18,7 @@ import { Card } from "./components/commoncomp.jsx"
 
 import { Docappointments } from "./Pages/Docappointments.jsx";
 import { AboutPage } from "./components/aboutpage.jsx"
-
+import { ViewAllReport } from "./Pages/ViewallReport.jsx";
 import ImageUploader from "./Pages/check.jsx";
 
 import { MyDoctors } from "./Pages/Mydoctors.jsx";
@@ -74,8 +74,8 @@ function App() {
         <Route path="/PatientAPP" element={<PatientAPP />}></Route>
         <Route path="/notificationsP" element={<Notifications />}></Route>
         <Route path="/abt" element={<AboutPage />}></Route>
-   
-
+     
+        <Route path="/var" element={<ViewAllReport />}></Route>
 
 
         <Route path="/MyDoctors"
