@@ -31,7 +31,7 @@ import { Navbar } from "./components/Navbar.jsx";
 import { NavbarD } from "./components/NavbarD.jsx";
 import { Apprequest } from "./Pages/Apprequest.jsx";
 import { Requests } from "./Pages/Requestpage.jsx";
-import { AnalogClock }from "./Pages/clockpage.jsx"
+import { AnalogClock } from "./Pages/clockpage.jsx"
 const URL =
   process.env.NODE_ENV === "production" ? undefined : "http://localhost:4000";
 
@@ -46,7 +46,7 @@ function App() {
           element={<LoginP />}
         >
         </Route>
-        <Route path="/video" element={<LobbyScreen />} />
+        <Route path="/lobby/:doctorId/:patientId" element={<LobbyScreen />} />
         <Route path="/room/:roomId" element={<RoomPage />} />
         <Route path="/report/:doctorId/:patientId" element={<Treatment />}></Route>
         <Route path="/doctor/:doctorId" element={<ProfilePage />}></Route>
@@ -74,38 +74,38 @@ function App() {
         <Route path="/PatientAPP" element={<PatientAPP />}></Route>
         <Route path="/notificationsP" element={<Notifications />}></Route>
         <Route path="/abt" element={<AboutPage />}></Route>
-   
+
 
 
 
         <Route path="/MyDoctors"
-        element={<MyDoctors/>}
+          element={<MyDoctors />}
         ></Route>
         <Route path="/apprequest"
-        element={<Apprequest/>}
+          element={<Apprequest />}
         ></Route>
-         
-         <Route path="/Prof"
-        element={<ProfilePages/>}
+
+        <Route path="/Prof"
+          element={<ProfilePages />}
         ></Route>
-        
+
         <Route path="/Requests"
-        element={<Requests/>}
+          element={<Requests />}
         ></Route>
-       <Route path="/docappointments"
-        element = {<Docappointments/>}
+        <Route path="/docappointments"
+          element={<Docappointments />}
         ></Route>
 
-        
 
-        
+
+
 
         <Route path="/About" element={<About />}></Route>
         <Route path="/viewreport/:doctorId/:patientId" element={<ViewReport />}></Route>
         <Route path="/Profd" element={<ProfileDoc />}></Route>
         <Route path="/chat" element={<ChatTest />}></Route>
         <Route path="/common/:doctorId/:patientId" element={<Card />}></Route>
-        <Route path="/clk" element={<AnalogClock/>}></Route>
+        <Route path="/clk" element={<AnalogClock />}></Route>
 
       </Routes>
 
