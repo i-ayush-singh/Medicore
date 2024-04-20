@@ -28,6 +28,7 @@ export const getMyDoctors = async (req, res) => {
   }
 };
 
+//not implemented yet
 export const getMyReports = async (req, res) => {
   try {
     const { patientId } = req.params;
@@ -55,6 +56,38 @@ export const getReport = async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 };
+
+export const getReportInfo = async (req, res) => {
+  try {
+    const { patientId } = req.params;
+
+    const patient = await Patient.findById(patientId);
+
+    const reportsInfo = await Promise.all(
+      patient.files.forEach(async (key, value) => {
+        const report = await Report.findById(value);
+        const doctor = await Report.findById(key);
+
+        const updated = report.updatedAt.substring(0, 10).split("-");
+        const reportInfo = {
+          doctorName: doctor.fullName,
+          specialist: doctor.specialist,
+          picturePath: doctor.picturePath,
+          date: updated[2],
+          month: updated[1],
+          year: updated[0],
+        };
+
+        return reportInfo;
+      })
+    );
+
+    res.status(200).json(reportsInfo);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+
 export const requestAppointment = async (req, res) => {
   try {
     const { patientId } = req.body;
@@ -232,9 +265,9 @@ export const editDataP = async (req, res) => {
 
     const locationObj = await axios.get(
       "https://geocode.maps.co/search?q=" +
-      location +
-      "%20india" +
-      "&api_key=65eee4b0c9e2b147377658rsp5199d9"
+        location +
+        "%20india" +
+        "&api_key=65eee4b0c9e2b147377658rsp5199d9"
     );
 
     const latitude = locationObj.data[0].lat,
@@ -281,10 +314,10 @@ export const checkFriend = async (req, res) => {
   } catch (err) {
     res.status(404).json({ error: error.message });
   }
-}
+};
 export const ViewReport = async (req, res) => {
   try {
-    const {doctorId , patientId} = req.params;
+    const { doctorId, patientId } = req.params;
     const patient = await Patient.findById(patientId);
 
     const report = await Report.findById(patient.files.get(doctorId));

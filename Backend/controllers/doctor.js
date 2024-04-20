@@ -178,13 +178,7 @@ export const checkRequest = async (req, res) => {
 
 export const createReport = async (req, res) => {
   try {
-    const {
-      patientId,
-      doctorId,
-      medicine,
-      symptoms,
-      tests,
-    } = req.body;
+    const { patientId, doctorId, medicine, symptoms, tests } = req.body;
     console.log(patientId);
     console.log(medicine);
     console.log(tests);
@@ -369,7 +363,7 @@ export const getdocAppointments = async (req, res) => {
         const { date, time } = appointmentObj;
         const patient = await Patient.findById(appointmentObj.patientId);
 
-        const { fullName, picturePath, files, _id, location} = patient;
+        const { fullName, picturePath, files, _id, location } = patient;
         const newObj = {
           date,
           time,
@@ -390,5 +384,3 @@ export const getdocAppointments = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
-
-
